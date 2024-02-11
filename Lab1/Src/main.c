@@ -193,12 +193,12 @@ int main(void)
     if (debouncer == 0x7FFFFFFF) {
       // This code triggers only once when transitioning to steady high!
       if (ledState == 0) {
-      　// switch LED 
+        // switch LED 
         GPIOC->BSRR = (1 << 6); // LED ON PC6
         GPIOC->BSRR = (1 << (7 + 16)); // LED OFF PC7
         ledState = 1; // LED state
       } else {
-      　// switch LED 
+        // switch LED 
         GPIOC->BSRR = (1 << 7); // LED ON PC6
         GPIOC->BSRR = (1 << (6 + 16)); // LED OFF PC6
         ledState = 0; // LED state
