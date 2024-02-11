@@ -1,0 +1,457 @@
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s 			page 1
+
+
+   1              		.cpu cortex-m0
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"stm32f0xx_it.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Src/stm32f0xx_it.c"
+  18              		.section	.text.NMI_Handler,"ax",%progbits
+  19              		.align	1
+  20              		.global	NMI_Handler
+  21              		.syntax unified
+  22              		.code	16
+  23              		.thumb_func
+  25              	NMI_Handler:
+  26              	.LFB40:
+   1:Src/stm32f0xx_it.c **** /* USER CODE BEGIN Header */
+   2:Src/stm32f0xx_it.c **** /**
+   3:Src/stm32f0xx_it.c ****   ******************************************************************************
+   4:Src/stm32f0xx_it.c ****   * @file    stm32f0xx_it.c
+   5:Src/stm32f0xx_it.c ****   * @brief   Interrupt Service Routines.
+   6:Src/stm32f0xx_it.c ****   ******************************************************************************
+   7:Src/stm32f0xx_it.c ****   * @attention
+   8:Src/stm32f0xx_it.c ****   *
+   9:Src/stm32f0xx_it.c ****   * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+  10:Src/stm32f0xx_it.c ****   * All rights reserved.</center></h2>
+  11:Src/stm32f0xx_it.c ****   *
+  12:Src/stm32f0xx_it.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  13:Src/stm32f0xx_it.c ****   * the "License"; You may not use this file except in compliance with the
+  14:Src/stm32f0xx_it.c ****   * License. You may obtain a copy of the License at:
+  15:Src/stm32f0xx_it.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  16:Src/stm32f0xx_it.c ****   *
+  17:Src/stm32f0xx_it.c ****   ******************************************************************************
+  18:Src/stm32f0xx_it.c ****   */
+  19:Src/stm32f0xx_it.c **** /* USER CODE END Header */
+  20:Src/stm32f0xx_it.c **** 
+  21:Src/stm32f0xx_it.c **** /* Includes ------------------------------------------------------------------*/
+  22:Src/stm32f0xx_it.c **** #include "main.h"
+  23:Src/stm32f0xx_it.c **** #include "stm32f0xx_it.h"
+  24:Src/stm32f0xx_it.c **** /* Private includes ----------------------------------------------------------*/
+  25:Src/stm32f0xx_it.c **** /* USER CODE BEGIN Includes */
+  26:Src/stm32f0xx_it.c **** /* USER CODE END Includes */
+  27:Src/stm32f0xx_it.c **** 
+  28:Src/stm32f0xx_it.c **** /* Private typedef -----------------------------------------------------------*/
+  29:Src/stm32f0xx_it.c **** /* USER CODE BEGIN TD */
+  30:Src/stm32f0xx_it.c **** 
+  31:Src/stm32f0xx_it.c **** /* USER CODE END TD */
+  32:Src/stm32f0xx_it.c **** 
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s 			page 2
+
+
+  33:Src/stm32f0xx_it.c **** /* Private define ------------------------------------------------------------*/
+  34:Src/stm32f0xx_it.c **** /* USER CODE BEGIN PD */
+  35:Src/stm32f0xx_it.c ****  
+  36:Src/stm32f0xx_it.c **** /* USER CODE END PD */
+  37:Src/stm32f0xx_it.c **** 
+  38:Src/stm32f0xx_it.c **** /* Private macro -------------------------------------------------------------*/
+  39:Src/stm32f0xx_it.c **** /* USER CODE BEGIN PM */
+  40:Src/stm32f0xx_it.c **** 
+  41:Src/stm32f0xx_it.c **** /* USER CODE END PM */
+  42:Src/stm32f0xx_it.c **** 
+  43:Src/stm32f0xx_it.c **** /* Private variables ---------------------------------------------------------*/
+  44:Src/stm32f0xx_it.c **** /* USER CODE BEGIN PV */
+  45:Src/stm32f0xx_it.c **** 
+  46:Src/stm32f0xx_it.c **** /* USER CODE END PV */
+  47:Src/stm32f0xx_it.c **** 
+  48:Src/stm32f0xx_it.c **** /* Private function prototypes -----------------------------------------------*/
+  49:Src/stm32f0xx_it.c **** /* USER CODE BEGIN PFP */
+  50:Src/stm32f0xx_it.c **** 
+  51:Src/stm32f0xx_it.c **** /* USER CODE END PFP */
+  52:Src/stm32f0xx_it.c **** 
+  53:Src/stm32f0xx_it.c **** /* Private user code ---------------------------------------------------------*/
+  54:Src/stm32f0xx_it.c **** /* USER CODE BEGIN 0 */
+  55:Src/stm32f0xx_it.c **** 
+  56:Src/stm32f0xx_it.c **** /* USER CODE END 0 */
+  57:Src/stm32f0xx_it.c **** 
+  58:Src/stm32f0xx_it.c **** /* External variables --------------------------------------------------------*/
+  59:Src/stm32f0xx_it.c **** 
+  60:Src/stm32f0xx_it.c **** /* USER CODE BEGIN EV */
+  61:Src/stm32f0xx_it.c **** 
+  62:Src/stm32f0xx_it.c **** /* USER CODE END EV */
+  63:Src/stm32f0xx_it.c **** 
+  64:Src/stm32f0xx_it.c **** /******************************************************************************/
+  65:Src/stm32f0xx_it.c **** /*           Cortex-M0 Processor Interruption and Exception Handlers          */ 
+  66:Src/stm32f0xx_it.c **** /******************************************************************************/
+  67:Src/stm32f0xx_it.c **** /**
+  68:Src/stm32f0xx_it.c ****   * @brief This function handles Non maskable interrupt.
+  69:Src/stm32f0xx_it.c ****   */
+  70:Src/stm32f0xx_it.c **** void NMI_Handler(void)
+  71:Src/stm32f0xx_it.c **** {
+  27              		.loc 1 71 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  72:Src/stm32f0xx_it.c ****   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
+  73:Src/stm32f0xx_it.c **** 
+  74:Src/stm32f0xx_it.c ****   /* USER CODE END NonMaskableInt_IRQn 0 */
+  75:Src/stm32f0xx_it.c ****   /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
+  76:Src/stm32f0xx_it.c **** 
+  77:Src/stm32f0xx_it.c ****   /* USER CODE END NonMaskableInt_IRQn 1 */
+  78:Src/stm32f0xx_it.c **** }
+  32              		.loc 1 78 1 view .LVU1
+  33              		@ sp needed
+  34 0000 7047     		bx	lr
+  35              		.cfi_endproc
+  36              	.LFE40:
+  38              		.section	.text.HardFault_Handler,"ax",%progbits
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s 			page 3
+
+
+  39              		.align	1
+  40              		.global	HardFault_Handler
+  41              		.syntax unified
+  42              		.code	16
+  43              		.thumb_func
+  45              	HardFault_Handler:
+  46              	.LFB41:
+  79:Src/stm32f0xx_it.c **** 
+  80:Src/stm32f0xx_it.c **** /**
+  81:Src/stm32f0xx_it.c ****   * @brief This function handles Hard fault interrupt.
+  82:Src/stm32f0xx_it.c ****   */
+  83:Src/stm32f0xx_it.c **** void HardFault_Handler(void)
+  84:Src/stm32f0xx_it.c **** {
+  47              		.loc 1 84 1 view -0
+  48              		.cfi_startproc
+  49              		@ Volatile: function does not return.
+  50              		@ args = 0, pretend = 0, frame = 0
+  51              		@ frame_needed = 0, uses_anonymous_args = 0
+  52              		@ link register save eliminated.
+  53              	.L3:
+  85:Src/stm32f0xx_it.c ****   /* USER CODE BEGIN HardFault_IRQn 0 */
+  86:Src/stm32f0xx_it.c **** 
+  87:Src/stm32f0xx_it.c ****   /* USER CODE END HardFault_IRQn 0 */
+  88:Src/stm32f0xx_it.c ****   while (1)
+  54              		.loc 1 88 3 view .LVU3
+  89:Src/stm32f0xx_it.c ****   {
+  90:Src/stm32f0xx_it.c ****     /* USER CODE BEGIN W1_HardFault_IRQn 0 */
+  91:Src/stm32f0xx_it.c ****     /* USER CODE END W1_HardFault_IRQn 0 */
+  92:Src/stm32f0xx_it.c ****   }
+  55              		.loc 1 92 3 view .LVU4
+  88:Src/stm32f0xx_it.c ****   {
+  56              		.loc 1 88 9 view .LVU5
+  57 0000 FEE7     		b	.L3
+  58              		.cfi_endproc
+  59              	.LFE41:
+  61              		.section	.text.SVC_Handler,"ax",%progbits
+  62              		.align	1
+  63              		.global	SVC_Handler
+  64              		.syntax unified
+  65              		.code	16
+  66              		.thumb_func
+  68              	SVC_Handler:
+  69              	.LFB42:
+  93:Src/stm32f0xx_it.c **** }
+  94:Src/stm32f0xx_it.c **** 
+  95:Src/stm32f0xx_it.c **** /**
+  96:Src/stm32f0xx_it.c ****   * @brief This function handles System service call via SWI instruction.
+  97:Src/stm32f0xx_it.c ****   */
+  98:Src/stm32f0xx_it.c **** void SVC_Handler(void)
+  99:Src/stm32f0xx_it.c **** {
+  70              		.loc 1 99 1 view -0
+  71              		.cfi_startproc
+  72              		@ args = 0, pretend = 0, frame = 0
+  73              		@ frame_needed = 0, uses_anonymous_args = 0
+  74              		@ link register save eliminated.
+ 100:Src/stm32f0xx_it.c ****   /* USER CODE BEGIN SVC_IRQn 0 */
+ 101:Src/stm32f0xx_it.c **** 
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s 			page 4
+
+
+ 102:Src/stm32f0xx_it.c ****   /* USER CODE END SVC_IRQn 0 */
+ 103:Src/stm32f0xx_it.c ****   /* USER CODE BEGIN SVC_IRQn 1 */
+ 104:Src/stm32f0xx_it.c **** 
+ 105:Src/stm32f0xx_it.c ****   /* USER CODE END SVC_IRQn 1 */
+ 106:Src/stm32f0xx_it.c **** }
+  75              		.loc 1 106 1 view .LVU7
+  76              		@ sp needed
+  77 0000 7047     		bx	lr
+  78              		.cfi_endproc
+  79              	.LFE42:
+  81              		.section	.text.PendSV_Handler,"ax",%progbits
+  82              		.align	1
+  83              		.global	PendSV_Handler
+  84              		.syntax unified
+  85              		.code	16
+  86              		.thumb_func
+  88              	PendSV_Handler:
+  89              	.LFB43:
+ 107:Src/stm32f0xx_it.c **** 
+ 108:Src/stm32f0xx_it.c **** /**
+ 109:Src/stm32f0xx_it.c ****   * @brief This function handles Pendable request for system service.
+ 110:Src/stm32f0xx_it.c ****   */
+ 111:Src/stm32f0xx_it.c **** void PendSV_Handler(void)
+ 112:Src/stm32f0xx_it.c **** {
+  90              		.loc 1 112 1 view -0
+  91              		.cfi_startproc
+  92              		@ args = 0, pretend = 0, frame = 0
+  93              		@ frame_needed = 0, uses_anonymous_args = 0
+  94              		@ link register save eliminated.
+ 113:Src/stm32f0xx_it.c ****   /* USER CODE BEGIN PendSV_IRQn 0 */
+ 114:Src/stm32f0xx_it.c **** 
+ 115:Src/stm32f0xx_it.c ****   /* USER CODE END PendSV_IRQn 0 */
+ 116:Src/stm32f0xx_it.c ****   /* USER CODE BEGIN PendSV_IRQn 1 */
+ 117:Src/stm32f0xx_it.c **** 
+ 118:Src/stm32f0xx_it.c ****   /* USER CODE END PendSV_IRQn 1 */
+ 119:Src/stm32f0xx_it.c **** }
+  95              		.loc 1 119 1 view .LVU9
+  96              		@ sp needed
+  97 0000 7047     		bx	lr
+  98              		.cfi_endproc
+  99              	.LFE43:
+ 101              		.section	.text.SysTick_Handler,"ax",%progbits
+ 102              		.align	1
+ 103              		.global	SysTick_Handler
+ 104              		.syntax unified
+ 105              		.code	16
+ 106              		.thumb_func
+ 108              	SysTick_Handler:
+ 109              	.LFB44:
+ 120:Src/stm32f0xx_it.c **** 
+ 121:Src/stm32f0xx_it.c **** /**
+ 122:Src/stm32f0xx_it.c ****   * @brief This function handles System tick timer.
+ 123:Src/stm32f0xx_it.c ****   */
+ 124:Src/stm32f0xx_it.c **** void SysTick_Handler(void)
+ 125:Src/stm32f0xx_it.c **** {
+ 110              		.loc 1 125 1 view -0
+ 111              		.cfi_startproc
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s 			page 5
+
+
+ 112              		@ args = 0, pretend = 0, frame = 0
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114 0000 10B5     		push	{r4, lr}
+ 115              	.LCFI0:
+ 116              		.cfi_def_cfa_offset 8
+ 117              		.cfi_offset 4, -8
+ 118              		.cfi_offset 14, -4
+ 126:Src/stm32f0xx_it.c ****   /* USER CODE BEGIN SysTick_IRQn 0 */
+ 127:Src/stm32f0xx_it.c **** 
+ 128:Src/stm32f0xx_it.c ****   /* USER CODE END SysTick_IRQn 0 */
+ 129:Src/stm32f0xx_it.c ****   HAL_IncTick();
+ 119              		.loc 1 129 3 view .LVU11
+ 120 0002 FFF7FEFF 		bl	HAL_IncTick
+ 121              	.LVL0:
+ 130:Src/stm32f0xx_it.c ****   /* USER CODE BEGIN SysTick_IRQn 1 */
+ 131:Src/stm32f0xx_it.c ****   static uint32_t counter = 0; 
+ 122              		.loc 1 131 3 view .LVU12
+ 132:Src/stm32f0xx_it.c ****   //GPIOC->BSRR = (1 << 7);
+ 133:Src/stm32f0xx_it.c ****   counter++; 
+ 123              		.loc 1 133 3 view .LVU13
+ 124              		.loc 1 133 10 is_stmt 0 view .LVU14
+ 125 0006 074A     		ldr	r2, .L8
+ 126 0008 1368     		ldr	r3, [r2]
+ 127 000a 0133     		adds	r3, r3, #1
+ 128 000c 1360     		str	r3, [r2]
+ 134:Src/stm32f0xx_it.c ****   if (counter >= 200) { 
+ 129              		.loc 1 134 3 is_stmt 1 view .LVU15
+ 130              		.loc 1 134 6 is_stmt 0 view .LVU16
+ 131 000e C72B     		cmp	r3, #199
+ 132 0010 07D9     		bls	.L6
+ 135:Src/stm32f0xx_it.c ****     //HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_7); 
+ 136:Src/stm32f0xx_it.c ****     GPIOC->ODR ^= (1 << 7);
+ 133              		.loc 1 136 5 is_stmt 1 view .LVU17
+ 134              		.loc 1 136 10 is_stmt 0 view .LVU18
+ 135 0012 054A     		ldr	r2, .L8+4
+ 136 0014 5369     		ldr	r3, [r2, #20]
+ 137              		.loc 1 136 16 view .LVU19
+ 138 0016 8021     		movs	r1, #128
+ 139 0018 4B40     		eors	r3, r1
+ 140 001a 5361     		str	r3, [r2, #20]
+ 137:Src/stm32f0xx_it.c ****     counter = 0; 
+ 141              		.loc 1 137 5 is_stmt 1 view .LVU20
+ 142              		.loc 1 137 13 is_stmt 0 view .LVU21
+ 143 001c 014B     		ldr	r3, .L8
+ 144 001e 0022     		movs	r2, #0
+ 145 0020 1A60     		str	r2, [r3]
+ 146              	.L6:
+ 138:Src/stm32f0xx_it.c ****   }
+ 139:Src/stm32f0xx_it.c ****   /* USER CODE END SysTick_IRQn 1 */
+ 140:Src/stm32f0xx_it.c **** }
+ 147              		.loc 1 140 1 view .LVU22
+ 148              		@ sp needed
+ 149 0022 10BD     		pop	{r4, pc}
+ 150              	.L9:
+ 151              		.align	2
+ 152              	.L8:
+ 153 0024 00000000 		.word	counter.0
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s 			page 6
+
+
+ 154 0028 00080048 		.word	1207961600
+ 155              		.cfi_endproc
+ 156              	.LFE44:
+ 158              		.section	.text.EXTI0_1_IRQHandler,"ax",%progbits
+ 159              		.align	1
+ 160              		.global	EXTI0_1_IRQHandler
+ 161              		.syntax unified
+ 162              		.code	16
+ 163              		.thumb_func
+ 165              	EXTI0_1_IRQHandler:
+ 166              	.LFB45:
+ 141:Src/stm32f0xx_it.c **** 
+ 142:Src/stm32f0xx_it.c **** /**
+ 143:Src/stm32f0xx_it.c ****   * @brief This function handles Hard interapt.
+ 144:Src/stm32f0xx_it.c ****   */
+ 145:Src/stm32f0xx_it.c **** void EXTI0_1_IRQHandler(void)
+ 146:Src/stm32f0xx_it.c **** {
+ 167              		.loc 1 146 1 is_stmt 1 view -0
+ 168              		.cfi_startproc
+ 169              		@ args = 0, pretend = 0, frame = 8
+ 170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171              		@ link register save eliminated.
+ 172 0000 82B0     		sub	sp, sp, #8
+ 173              	.LCFI1:
+ 174              		.cfi_def_cfa_offset 8
+ 147:Src/stm32f0xx_it.c ****   GPIOC->ODR ^= GPIO_PIN_8; // orange
+ 175              		.loc 1 147 3 view .LVU24
+ 176              		.loc 1 147 8 is_stmt 0 view .LVU25
+ 177 0002 134B     		ldr	r3, .L13
+ 178 0004 5969     		ldr	r1, [r3, #20]
+ 179              		.loc 1 147 14 view .LVU26
+ 180 0006 8022     		movs	r2, #128
+ 181 0008 5200     		lsls	r2, r2, #1
+ 182 000a 4A40     		eors	r2, r1
+ 183 000c 5A61     		str	r2, [r3, #20]
+ 148:Src/stm32f0xx_it.c ****   GPIOC->ODR ^= GPIO_PIN_9; // green
+ 184              		.loc 1 148 3 is_stmt 1 view .LVU27
+ 185              		.loc 1 148 8 is_stmt 0 view .LVU28
+ 186 000e 5969     		ldr	r1, [r3, #20]
+ 187              		.loc 1 148 14 view .LVU29
+ 188 0010 8022     		movs	r2, #128
+ 189 0012 9200     		lsls	r2, r2, #2
+ 190 0014 4A40     		eors	r2, r1
+ 191 0016 5A61     		str	r2, [r3, #20]
+ 149:Src/stm32f0xx_it.c ****   // delay about 1 - 2 secs
+ 150:Src/stm32f0xx_it.c ****   for(volatile uint32_t i = 0; i < 1500000; i++){
+ 192              		.loc 1 150 3 is_stmt 1 view .LVU30
+ 193              	.LBB2:
+ 194              		.loc 1 150 7 view .LVU31
+ 195              		.loc 1 150 25 is_stmt 0 view .LVU32
+ 196 0018 0023     		movs	r3, #0
+ 197 001a 0193     		str	r3, [sp, #4]
+ 198              		.loc 1 150 3 view .LVU33
+ 199 001c 02E0     		b	.L11
+ 200              	.L12:
+ 151:Src/stm32f0xx_it.c ****        
+ 152:Src/stm32f0xx_it.c ****   }
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s 			page 7
+
+
+ 201              		.loc 1 152 3 is_stmt 1 view .LVU34
+ 150:Src/stm32f0xx_it.c ****        
+ 202              		.loc 1 150 46 discriminator 3 view .LVU35
+ 203 001e 019B     		ldr	r3, [sp, #4]
+ 204 0020 0133     		adds	r3, r3, #1
+ 205 0022 0193     		str	r3, [sp, #4]
+ 206              	.L11:
+ 150:Src/stm32f0xx_it.c ****        
+ 207              		.loc 1 150 34 discriminator 1 view .LVU36
+ 208 0024 019A     		ldr	r2, [sp, #4]
+ 209 0026 0B4B     		ldr	r3, .L13+4
+ 210 0028 9A42     		cmp	r2, r3
+ 211 002a F8D9     		bls	.L12
+ 212              	.LBE2:
+ 153:Src/stm32f0xx_it.c ****   GPIOC->ODR ^= GPIO_PIN_8; // orange
+ 213              		.loc 1 153 3 view .LVU37
+ 214              		.loc 1 153 8 is_stmt 0 view .LVU38
+ 215 002c 084B     		ldr	r3, .L13
+ 216 002e 5969     		ldr	r1, [r3, #20]
+ 217              		.loc 1 153 14 view .LVU39
+ 218 0030 8022     		movs	r2, #128
+ 219 0032 5200     		lsls	r2, r2, #1
+ 220 0034 4A40     		eors	r2, r1
+ 221 0036 5A61     		str	r2, [r3, #20]
+ 154:Src/stm32f0xx_it.c ****   GPIOC->ODR ^= GPIO_PIN_9; // green
+ 222              		.loc 1 154 3 is_stmt 1 view .LVU40
+ 223              		.loc 1 154 8 is_stmt 0 view .LVU41
+ 224 0038 5969     		ldr	r1, [r3, #20]
+ 225              		.loc 1 154 14 view .LVU42
+ 226 003a 8022     		movs	r2, #128
+ 227 003c 9200     		lsls	r2, r2, #2
+ 228 003e 4A40     		eors	r2, r1
+ 229 0040 5A61     		str	r2, [r3, #20]
+ 155:Src/stm32f0xx_it.c **** 
+ 156:Src/stm32f0xx_it.c ****   // clear the pending register
+ 157:Src/stm32f0xx_it.c ****   EXTI->PR |= (1 << 0); //EXTI_PR_PR0
+ 230              		.loc 1 157 3 is_stmt 1 view .LVU43
+ 231              		.loc 1 157 7 is_stmt 0 view .LVU44
+ 232 0042 054A     		ldr	r2, .L13+8
+ 233 0044 5369     		ldr	r3, [r2, #20]
+ 234              		.loc 1 157 12 view .LVU45
+ 235 0046 0121     		movs	r1, #1
+ 236 0048 0B43     		orrs	r3, r1
+ 237 004a 5361     		str	r3, [r2, #20]
+ 158:Src/stm32f0xx_it.c **** }
+ 238              		.loc 1 158 1 view .LVU46
+ 239 004c 02B0     		add	sp, sp, #8
+ 240              		@ sp needed
+ 241 004e 7047     		bx	lr
+ 242              	.L14:
+ 243              		.align	2
+ 244              	.L13:
+ 245 0050 00080048 		.word	1207961600
+ 246 0054 5FE31600 		.word	1499999
+ 247 0058 00040140 		.word	1073808384
+ 248              		.cfi_endproc
+ 249              	.LFE45:
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s 			page 8
+
+
+ 251              		.section	.bss.counter.0,"aw",%nobits
+ 252              		.align	2
+ 255              	counter.0:
+ 256 0000 00000000 		.space	4
+ 257              		.text
+ 258              	.Letext0:
+ 259              		.file 2 "/Applications/ArmGNUToolchain/13.2.Rel1/arm-none-eabi/arm-none-eabi/include/machine/_defa
+ 260              		.file 3 "/Applications/ArmGNUToolchain/13.2.Rel1/arm-none-eabi/arm-none-eabi/include/sys/_stdint.h
+ 261              		.file 4 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f072xb.h"
+ 262              		.file 5 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h"
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f0xx_it.c
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:19     .text.NMI_Handler:00000000 $t
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:25     .text.NMI_Handler:00000000 NMI_Handler
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:39     .text.HardFault_Handler:00000000 $t
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:45     .text.HardFault_Handler:00000000 HardFault_Handler
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:62     .text.SVC_Handler:00000000 $t
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:68     .text.SVC_Handler:00000000 SVC_Handler
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:82     .text.PendSV_Handler:00000000 $t
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:88     .text.PendSV_Handler:00000000 PendSV_Handler
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:102    .text.SysTick_Handler:00000000 $t
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:108    .text.SysTick_Handler:00000000 SysTick_Handler
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:153    .text.SysTick_Handler:00000024 $d
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:255    .bss.counter.0:00000000 counter.0
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:159    .text.EXTI0_1_IRQHandler:00000000 $t
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:165    .text.EXTI0_1_IRQHandler:00000000 EXTI0_1_IRQHandler
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:245    .text.EXTI0_1_IRQHandler:00000050 $d
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccLzdsJh.s:252    .bss.counter.0:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_IncTick
