@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s 			page 1
 
 
    1              		.cpu cortex-m0
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
   30:Src/main.c    ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
   31:Src/main.c    ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
   32:Src/main.c    ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 2
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s 			page 2
 
 
   33:Src/main.c    ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
   87:Src/main.c    ****   // // PC9 to high green
   88:Src/main.c    ****   GPIOC->BSRR |= (1 << 9);
   89:Src/main.c    **** 
-ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 3
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s 			page 3
 
 
   90:Src/main.c    ****   //HAL_SYSTICK_Config(SystemCoreClock / 1000);
@@ -145,7 +145,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
  111:Src/main.c    **** 
  112:Src/main.c    ****   //part 2
  113:Src/main.c    ****   HAL_NVIC_SetPriority(SysTick_IRQn, 2, 0);
- 114:Src/main.c    ****   HAL_NVIC_SetPriority(EXTI0_1_IRQn, 3, 0);
+ 114:Src/main.c    ****   HAL_NVIC_SetPriority(EXTI0_1_IRQn, 1, 0);
  115:Src/main.c    **** 
  116:Src/main.c    ****   while(1){
  117:Src/main.c    ****     HAL_Delay(600);
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
  144:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1;
  145:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
  146:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 4
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s 			page 4
 
 
  147:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
   45      6D61696E 
   45      2E6300
   46              		.global	__aeabi_uidiv
-ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 5
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s 			page 5
 
 
   47              		.section	.text.SystemClock_Config,"ax",%progbits
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
   89              	.LVL1:
  136:Src/main.c    ****   {
   90              		.loc 1 136 6 discriminator 1 view .LVU17
-ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 6
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s 			page 6
 
 
   91 001a 0028     		cmp	r0, #0
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
  130              	.LVL6:
  163:Src/main.c    **** }
  131              		.loc 1 163 3 view .LVU33
-ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 7
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s 			page 7
 
 
  132 004c 0120     		movs	r0, #1
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
   74:Src/main.c    ****   RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
  183              		.loc 1 74 3 view .LVU39
  184 0006 FFF7FEFF 		bl	SystemClock_Config
-ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 8
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s 			page 8
 
 
  185              	.LVL11:
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
  224 0038 C901     		lsls	r1, r1, #7
  225 003a 2143     		orrs	r1, r4
  226 003c 1960     		str	r1, [r3]
-ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 9
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s 			page 9
 
 
   81:Src/main.c    ****   GPIOC->MODER |= (1 << (9 * 2)); // PC9
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
  264              		.loc 1 88 8 is_stmt 0 view .LVU71
  265 0068 9869     		ldr	r0, [r3, #24]
   88:Src/main.c    **** 
-ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 10
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s 			page 10
 
 
  266              		.loc 1 88 15 view .LVU72
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
  305 0098 0720     		movs	r0, #7
  306 009a 8343     		bics	r3, r0
  307 009c 9360     		str	r3, [r2, #8]
-ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 11
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s 			page 11
 
 
  105:Src/main.c    ****   EXTI->RTSR |= (1 << 0);
@@ -625,7 +625,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
  322 00ac 0238     		subs	r0, r0, #2
  323 00ae FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
  324              	.LVL12:
- 113:Src/main.c    ****   HAL_NVIC_SetPriority(EXTI0_1_IRQn, 3, 0);
+ 113:Src/main.c    ****   HAL_NVIC_SetPriority(EXTI0_1_IRQn, 1, 0);
  325              		.loc 1 113 3 view .LVU95
  326 00b2 0120     		movs	r0, #1
  327 00b4 0022     		movs	r2, #0
@@ -636,7 +636,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
  114:Src/main.c    **** 
  332              		.loc 1 114 3 view .LVU96
  333 00be 0022     		movs	r2, #0
- 334 00c0 0321     		movs	r1, #3
+ 334 00c0 0121     		movs	r1, #1
  335 00c2 0520     		movs	r0, #5
  336 00c4 FFF7FEFF 		bl	HAL_NVIC_SetPriority
  337              	.LVL14:
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
  118:Src/main.c    ****   }
  349              		.loc 1 118 16 discriminator 1 view .LVU101
  350 00d4 4021     		movs	r1, #64
-ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 12
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s 			page 12
 
 
  351 00d6 4B40     		eors	r3, r1
@@ -687,20 +687,20 @@ ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 1
  374              		.file 6 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h"
  375              		.file 7 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_cortex.h"
  376              		.file 8 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h"
-ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s 			page 13
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s 			page 13
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s:19     .text._Error_Handler:00000000 $t
-/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s:25     .text._Error_Handler:00000000 _Error_Handler
-/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s:43     .rodata.SystemClock_Config.str1.4:00000000 $d
-/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s:48     .text.SystemClock_Config:00000000 $t
-/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s:54     .text.SystemClock_Config:00000000 SystemClock_Config
-/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s:157    .text.SystemClock_Config:0000006c $d
-/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s:162    .text.main:00000000 $t
-/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s:168    .text.main:00000000 main
-/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccX8LGs4.s:358    .text.main:000000dc $d
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s:19     .text._Error_Handler:00000000 $t
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s:25     .text._Error_Handler:00000000 _Error_Handler
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s:43     .rodata.SystemClock_Config.str1.4:00000000 $d
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s:48     .text.SystemClock_Config:00000000 $t
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s:54     .text.SystemClock_Config:00000000 SystemClock_Config
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s:157    .text.SystemClock_Config:0000006c $d
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s:162    .text.main:00000000 $t
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s:168    .text.main:00000000 main
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccj4X3In.s:358    .text.main:000000dc $d
 
 UNDEFINED SYMBOLS
 __aeabi_uidiv

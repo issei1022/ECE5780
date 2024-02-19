@@ -1,4 +1,4 @@
-/* USER CODE BEGIN Header */
+   /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    stm32f0xx_it.h
@@ -51,9 +51,8 @@ void NMI_Handler(void);
 void HardFault_Handler(void);
 void SVC_Handler(void);
 void PendSV_Handler(void);
-void SysTick_Handler(void);
 // add
-void EXTI0_1_IRQHandler(void);
+void TIM2_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */
