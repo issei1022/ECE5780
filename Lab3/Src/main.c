@@ -71,47 +71,56 @@ void SystemClock_Config(void);
 int main(void)
 {
 
-  // RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
-  // RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
-  // RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
+  RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+  RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
+  RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
 
-  // GPIOC->MODER &= ~((3 << (8 * 2)) | (3 << (9 * 2))); // clear
-  // GPIOC->MODER |= (1 << (8 * 2)); // PC8
-  // GPIOC->MODER |= (1 << (9 * 2)); // PC9
-  // GPIOC->OTYPER &= ~((1 << 8) | (1 << 9)); // clear and both push-pull type
-  // GPIOC->OSPEEDR &= ~((1 << (8 * 2)) | (1 << (9 * 2))); // clear and both low speed type
-  // GPIOC->PUPDR &= ~((3 << (8 * 2)) | (3 << (9 * 2))); // clear and both no pull-up down
+  GPIOC->MODER &= ~((3 << (8 * 2)) | (3 << (9 * 2))); // clear
+  GPIOC->MODER |= (1 << (8 * 2)); // PC8
+  GPIOC->MODER |= (1 << (9 * 2)); // PC9
+  GPIOC->OTYPER &= ~((1 << 8) | (1 << 9)); // clear and both push-pull type
+  GPIOC->OSPEEDR &= ~((1 << (8 * 2)) | (1 << (9 * 2))); // clear and both low speed type
+  GPIOC->PUPDR &= ~((3 << (8 * 2)) | (3 << (9 * 2))); // clear and both no pull-up down
 
 
-  // //uint32_t T_target = 8000;
-  // //uint8_t F_target = 4;
+  //uint32_t T_target = 8000;
+  //uint8_t F_target = 4;
 
-  // uint32_t psc = 7999;
-  // uint32_t arr = 125;
+  uint32_t psc = 7999;
+  uint32_t arr = 250;
 
-  // TIM2->PSC = psc;  
-  // TIM2->ARR = arr;
-  // TIM2->EGR = TIM_EGR_UG; 
-  // TIM2->DIER |= TIM_DIER_UIE; //TIM_DIER_UIE enable update interapt
-  // // enable timer
-  // TIM2->CR1 |= TIM_CR1_CEN;
+  TIM2->PSC = psc;  
+  TIM2->ARR = arr;
+  TIM2->EGR = TIM_EGR_UG; 
+  TIM2->DIER |= TIM_DIER_UIE; //TIM_DIER_UIE enable update interapt
+  // enable timer
+  TIM2->CR1 |= TIM_CR1_CEN;
 
-  // // // PC9 to high green
-  // GPIOC->BSRR |= (1 << 9);
+  // // PC9 to high green
+  GPIOC->BSRR |= (1 << 9);
 
-  // NVIC_EnableIRQ(TIM2_IRQn);
+  NVIC_EnableIRQ(TIM2_IRQn);
 
   RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
 
   uint32_t psc_tim3 = 39; // prescaler
   uint32_t arr_tim3 = 125; // auto reload register
 
-  // PWM
-  TIM3->CCMR1 |= TIM_CCMR1_OC1PE; // channel 1
-  TIM3->CCMR1 |= TIM_CCMR1_OC2PE; // channel 2
+  // channel 1
+  TIM3->CCMR1 &= ~(TIM_CCMR1_OC1M);
+  TIM3->CCMR1 |= TIM_CCMR1_OC1PE; 
+ 
+  // channel 2
+  TIM3->CCMR1 &= ~(TIM_CCMR1_OC2M);
+  TIM3->CCMR1 |= TIM_CCMR1_OC2PE;
 
   TIM3->CCMR1 |= (0x06 << 4);  // OC1M[2:0] = 110 PWM mode 2
   TIM3->CCMR1 |= (0x06 << 12); // OC2M[2:0] = 110 PWM mode 2
+
+  // preload
+  TIM3->CCMR1 |= TIM_CCMR1_OC1PE | TIM_CCMR1_OC2PE;
+  //porarity
+  TIM3->CCER &= ~(TIM_CCER_CC1P | TIM_CCER_CC2P);
 
   // channel 1 and 2 as out
   TIM3->CCER |= TIM_CCER_CC1E; // channel 1 enabled
@@ -129,11 +138,15 @@ int main(void)
   TIM3->CR1 |= TIM_CR1_CEN;
 
   RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
+
   GPIOC->MODER &= ~((3 << (6 * 2)) | (3 << (7 * 2))); 
   GPIOC->MODER |= (2 << (6 * 2)) | (2 << (7 * 2)); 
 
   //GPIOC->AFR[0] |= (1 << (6 * 4)) | (1 << (7 * 4));
+ // GPIOC->AFR[0] &= ~((0xF << (6 * 4)) | (0xF << (7 * 4)));
+ // GPIOC->AFR[0] |= (1 << (6 * 4)) | (1 << (7 * 4));
 
+ // TIM3->EGR |= TIM_EGR_UG;
 
 }
 
