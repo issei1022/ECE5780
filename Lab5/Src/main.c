@@ -113,7 +113,7 @@ int main(void)
                 (0x4 << 20);  // SCLDEL
 
   I2C2->CR1 |= I2C_CR1_PE; // Enable the I2C peripheral using the PE bit in the CR1 register.
-
+// part 1
   // Clear the NBYTES and SADD bit fields
   I2C2->CR2 &= ~((0x7F << 16) | (0x3FF << 0));
   // Set NBYTES = 1 and SADD = 0x69
@@ -134,14 +134,8 @@ int main(void)
   // error(wiring)
   } else if (I2C2->ISR & (1 << 1)) {
 
-    // GPIOC->MODER &= ~(3 << (9 * 2)); // clear
-    //     GPIOC->MODER |= (1 << (9 * 2)); // PC9
-    //     // // PC9 to high green
-    //     GPIOC->ODR |= (1 << 9);
-
-     
-    //Write the address of the “WHO_AM_I” register into the I2C transmit register
-    I2C2->TXDR |= 0x0F;
+    //WHO_AM_I register 
+    I2C2->TXDR = 0x0F;
 
     // wait until TC flag is set (1 << 6)
     while(!(I2C2->ISR & I2C_ISR_TC));
@@ -154,7 +148,7 @@ int main(void)
     // 6. Wait until either of the RXNE or NACKF flags are set
     // same as while (!(I2C2->ISR & (I2C_ISR_RXNE | I2C_ISR_NACKF))) {}
     while (!(I2C2->ISR & (1 << 2)) && !(I2C2->ISR & (1 << 4))){
-    // Just wait here until one of the flags is set
+    //  wait here until one of the flags is set
     }
 
     // Check if NACKF flag is set
@@ -164,32 +158,112 @@ int main(void)
        // wait until TC flag is set (1 << 6)
        while(!(I2C2->ISR & I2C_ISR_TC));
 
-      //  GPIOC->MODER &= ~(3 << (9 * 2)); // clear
-      // GPIOC->MODER |= (1 << (9 * 2)); // PC9
-      // GPIOC->OTYPER &= ~((1 << 9)); // clear and both push-pull type
-      // GPIOC->OSPEEDR &= ~((1 << (9 * 2))); // clear and both low speed type
-      // GPIOC->PUPDR &= ~((3 << (9 * 2))); // clear and both no pull-up down
-
-      // // // PC9 to high green
-      // GPIOC->BSRR |= (1 << 9);
-
       if(I2C2->RXDR == 0xD3) {
         GPIOC->MODER &= ~(3 << (9 * 2)); // clear
         GPIOC->MODER |= (1 << (9 * 2)); // PC9
-        GPIOC->OTYPER &= ~((1 << 9)); // clear and both push-pull type
-        GPIOC->OSPEEDR &= ~((1 << (9 * 2))); // clear and both low speed type
-        GPIOC->PUPDR &= ~((3 << (9 * 2))); // clear and both no pull-up down
-
         // // PC9 to high green
-        GPIOC->BSRR |= (1 << 9);
+        GPIOC->BSRR |= (1 << 9);        
+    
       }
     
       // stop
-     I2C2->CR2 |= I2C_CR2_STOP;
+      I2C2->CR2 |= I2C_CR2_STOP;
 
     }
   
   }
+  
+
+  // while(1) {
+  //   // Check if new data is available
+  //   int status = I2C_ReadRegister(0x0F, 0x27);
+  //  // if(status & 0x08) { // Check if ZYXDA bit is set
+  //   if(status) { 
+  //       // Read X(0x28) and Y(0x29)
+  //       int x_data = I2C_ReadData(0x28, 0x29);
+  //       int y_data = I2C_ReadData(0x29, 0x28);
+
+  //       // Process the data (implement your rotation indicator logic here)
+
+  //       // Simple delay loop; replace with a proper delay mechanism to match sensor data rate
+  //       for(int i = 0; i < 1000000; ++i) {}
+  //   }
+  // }
+}
+/*
+void I2C_WriteRegister(int deviceAddr, int registerAddr, int data) {
+    // Send START condition and slave address for write
+    I2C2->CR2 = (deviceAddr << 1) | (1 << 16); // SADD = deviceAddr, NBYTES = 1
+    I2C2->CR2 &= ~I2C_CR2_RD_WRN;              // Write operation
+    I2C2->CR2 |= I2C_CR2_START;                // Start condition
+
+    // Wait until TXIS flag is set or NACKF flag is set
+    while (!(I2C2->ISR & I2C_ISR_TXIS) && !(I2C2->ISR & I2C_ISR_NACKF));
+
+    // Check for NACKF error
+    if (I2C2->ISR & I2C_ISR_NACKF) {
+        // Error handling
+        return;
+    }
+
+    //  Send register address
+    I2C2->TXDR = registerAddr;
+
+    // Wait until TXIS flag is set for data transmission
+    while (!(I2C2->ISR & I2C_ISR_TXIS));
+
+    // Send data
+    I2C2->TXDR = data;
+
+    //  Wait until TC flag is set
+    while (!(I2C2->ISR & I2C_ISR_TC));
+
+    // Send STOP condition
+    I2C2->CR2 |= I2C_CR2_STOP;
+}
+
+int I2C_ReadData(int lowAddr, int highAddr) {
+    int lowByte = I2C_ReadRegister(L3GD20_ADDR, lowAddr | 0x80); // Set MSB for auto-increment
+    int highByte = I2C_ReadRegister(L3GD20_ADDR, highAddr);
+    return (int)((highByte << 8) | lowByte);
+}
+
+
+int I2C_ReadRegister(int deviceAddr, int registerAddr) {
+    // Send START condition and slave address for write
+    I2C2->CR2 = (deviceAddr << 1) | (1 << 16); // SADD = deviceAddr, NBYTES = 1
+    I2C2->CR2 &= ~I2C_CR2_RD_WRN;              // Write operation
+    I2C2->CR2 |= I2C_CR2_START;                // Start condition
+
+    //  Wait until TXIS flag is set or NACKF flag is set
+    while (!(I2C2->ISR & I2C_ISR_TXIS) && !(I2C2->ISR & I2C_ISR_NACKF));
+
+    // Check for NACKF error
+    if (I2C2->ISR & I2C_ISR_NACKF) {
+        // Error handling
+        return 0; // Should be an error code indicating failure
+    }
+
+    //  Send register address
+    I2C2->TXDR = registerAddr;
+
+    // Wait until TC flag is set
+    while (!(I2C2->ISR & I2C_ISR_TC));
+
+    // Send repeated START condition and slave address for read
+    I2C2->CR2 = (deviceAddr << 1) | (1 << 16) | I2C_CR2_RD_WRN; // Set RD_WRN bit for read
+    I2C2->CR2 |= I2C_CR2_START;                                 // Start condition
+
+    // Wait until RXNE flag is set
+    while (!(I2C2->ISR & I2C_ISR_RXNE));
+
+    // Read data
+    int data = I2C2->RXDR;
+
+    //  Send STOP condition
+    I2C2->CR2 |= I2C_CR2_STOP;
+
+    return data;
 }
 
 
