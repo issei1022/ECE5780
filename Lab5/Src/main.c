@@ -103,6 +103,9 @@ int main(void)
   //GPIOC->ODR |= (1 << 0); // initialize/set the pin high
   GPIOC->BSRR = (1 << 0);         // Set pin 0 high
 
+  GPIOC->MODER &= ~(3 << (9 * 2) | 3 << (6 * 2)); // clear
+  GPIOC->MODER |= (1 << (9 * 2) | 1 << (6 * 2) ); // PC9
+
   // I2C2 setting
   RCC->APB1ENR |= RCC_APB1ENR_I2C2EN;
   //I2C2->TIMINGR |= (1 << 28) | (0x13 << 20) | (0xF << 16) | (0x2 << 8) | 0x4;
@@ -114,7 +117,64 @@ int main(void)
 
   I2C2->CR1 |= I2C_CR1_PE; // Enable the I2C peripheral using the PE bit in the CR1 register.
 // part 1
-  // Clear the NBYTES and SADD bit fields
+  // // Clear the NBYTES and SADD bit fields
+  // I2C2->CR2 &= ~((0x7F << 16) | (0x3FF << 0));
+  // // Set NBYTES = 1 and SADD = 0x69
+  //  //Transmit
+  // I2C2->CR2 |= (1 << 16);
+  // I2C2->CR2 |= (0x69 << 1);
+
+  // // Clear RD_WRN and 0 is write option
+  // I2C2->CR2 &= ~I2C_CR2_RD_WRN;
+  // // Ser START bit
+  // I2C2->CR2 |= I2C_CR2_START;
+
+  // // #2　Wait until either TXIS or NACKF flags are set
+  // while (!(I2C2->ISR & (1 << 1)) && !(I2C2->ISR & (1 << 4)));
+      
+  // if (I2C2->ISR & (1 << 4)) { 
+        
+  // // error(wiring)
+  // } else if (I2C2->ISR & (1 << 1)) {
+
+  //   //WHO_AM_I register 
+  //   I2C2->TXDR = 0x0F;
+
+  //   // wait until TC flag is set (1 << 6)
+  //   while(!(I2C2->ISR & I2C_ISR_TC));
+
+  //   // 5. Reload the CR2 register with the parameters for a read operation I2C_CR2_RD_WRN(10bits)
+  //   I2C2->CR2 &= ~I2C_CR2_RD_WRN; // Clear the RD_WRN bit first if it was previously set for write
+  //   I2C2->CR2 |= I2C_CR2_RD_WRN;  // Set the RD_WRN bit to indicate a read operation
+  //   I2C2->CR2 |= I2C_CR2_START;   // Set the START bit again to perform a I2C restart condition
+
+  //   // 6. Wait until either of the RXNE or NACKF flags are set
+  //   // same as while (!(I2C2->ISR & (I2C_ISR_RXNE | I2C_ISR_NACKF))) {}
+  //   while (!(I2C2->ISR & (1 << 2)) && !(I2C2->ISR & (1 << 4))){
+  //   //  wait here until one of the flags is set
+  //   }
+
+  //   // Check if NACKF flag is set
+  //   if (I2C2->ISR & I2C_ISR_NACKF) {
+  //     //wiring
+  //   } else if (I2C2->ISR & I2C_ISR_RXNE) {
+  //      // wait until TC flag is set (1 << 6)
+  //      while(!(I2C2->ISR & I2C_ISR_TC));
+
+  //     if(I2C2->RXDR == 0xD3) {
+  //       // // PC9 to high green
+  //       GPIOC->ODR |= (1 << 9);        
+  //     }
+    
+  //     // stop
+  //     I2C2->CR2 |= I2C_CR2_STOP;
+
+  //   }
+  
+  // }
+  
+  // part 2
+   // Clear the NBYTES and SADD bit fields
   I2C2->CR2 &= ~((0x7F << 16) | (0x3FF << 0));
   // Set NBYTES = 1 and SADD = 0x69
    //Transmit
@@ -126,58 +186,70 @@ int main(void)
   // Ser START bit
   I2C2->CR2 |= I2C_CR2_START;
 
-  // #2　Wait until either TXIS or NACKF flags are set
+  // // #2　Wait until either TXIS or NACKF flags are set
   while (!(I2C2->ISR & (1 << 1)) && !(I2C2->ISR & (1 << 4)));
       
-  if (I2C2->ISR & (1 << 4)) { 
-        
-  // error(wiring)
-  } else if (I2C2->ISR & (1 << 1)) {
-
-    //WHO_AM_I register 
-    I2C2->TXDR = 0x0F;
-
-    // wait until TC flag is set (1 << 6)
-    while(!(I2C2->ISR & I2C_ISR_TC));
-
-    // 5. Reload the CR2 register with the parameters for a read operation I2C_CR2_RD_WRN(10bits)
-    I2C2->CR2 &= ~I2C_CR2_RD_WRN; // Clear the RD_WRN bit first if it was previously set for write
-    I2C2->CR2 |= I2C_CR2_RD_WRN;  // Set the RD_WRN bit to indicate a read operation
-    I2C2->CR2 |= I2C_CR2_START;   // Set the START bit again to perform a I2C restart condition
-
-    // 6. Wait until either of the RXNE or NACKF flags are set
-    // same as while (!(I2C2->ISR & (I2C_ISR_RXNE | I2C_ISR_NACKF))) {}
-    while (!(I2C2->ISR & (1 << 2)) && !(I2C2->ISR & (1 << 4))){
-    //  wait here until one of the flags is set
-    }
-
-    // Check if NACKF flag is set
-    if (I2C2->ISR & I2C_ISR_NACKF) {
-      //wiring
-    } else if (I2C2->ISR & I2C_ISR_RXNE) {
-       // wait until TC flag is set (1 << 6)
-       while(!(I2C2->ISR & I2C_ISR_TC));
-
-      if(I2C2->RXDR == 0xD3) {
-        GPIOC->MODER &= ~(3 << (9 * 2)); // clear
-        GPIOC->MODER |= (1 << (9 * 2)); // PC9
-        // // PC9 to high green
-        GPIOC->BSRR |= (1 << 9);        
-    
-      }
-    
-      // stop
-      I2C2->CR2 |= I2C_CR2_STOP;
-
-    }
-  
+  if (I2C2->ISR & I2C_ISR_NACKF) {
+      GPIOC->ODR |= (1 << 6); 
   }
-  
 
-  // while(1) {
+  // write CTRL_REG1 into I2C transmit register & set PD to Xen & Yen
+  // CTRL_REG1 |DR1|DR0|BW1|BW0|PD|Zen|Yen|Xen| (PD =1 Yen=1 Xen=1 ) = 0x0B
+  I2C2->TXDR |= (0x20 | 0x0B);
+
+  //waiting for TC
+  while(!(I2C2->ISR & I2C_ISR_TC));
+  //stop
+  I2C2->CR2 |= I2C_CR2_STOP;
+
+  char x_LSB, x_MSB, y_LSB, y_MSB;
+  int x_data, y_data;
+  int THRESHOLD = 1000;
+
+  while(1) {
+    
+     // Request X-axis LSB and MSB
+    // Assuming X-axis LSB at 0x28 and MSB at 0x29
+    x_LSB = read_I2C_register(0x28);
+    x_MSB = read_I2C_register(0x29);
+    // Combine to form X data
+    x_data = ((int)x_MSB << 8) | x_LSB;
+
+    // Request Y-axis LSB and MSB
+    // Assuming Y-axis LSB at 0x2A and MSB at 0x2B
+    y_LSB = read_I2C_register(0x2A);
+    y_MSB = read_I2C_register(0x2B);
+    // Combine to form Y data
+    y_data = ((int)y_MSB << 8) | y_LSB;
+
+     // Apply threshold and control LEDs for X-axis
+    if (x_data > THRESHOLD) {
+        // Light up LED for positive X rotation
+        GPIO_SetBits(GPIOC, LED_POS_X);
+        GPIO_ResetBits(GPIOC, LED_NEG_X);
+    } else if (x_data < -THRESHOLD) {
+        // Light up LED for negative X rotation
+        GPIO_ResetBits(GPIOC, LED_POS_X);
+        GPIO_SetBits(GPIOC, LED_NEG_X);
+    }
+
+    // Apply threshold and control LEDs for Y-axis
+    if (y_data > THRESHOLD) {
+        // Light up LED for positive Y rotation
+        GPIO_SetBits(GPIOC, LED_POS_Y);
+        GPIO_ResetBits(GPIOC, LED_NEG_Y);
+    } else if (y_data < -THRESHOLD) {
+        // Light up LED for negative Y rotation
+        GPIO_ResetBits(GPIOC, LED_POS_Y);
+        GPIO_SetBits(GPIOC, LED_NEG_Y);
+    }
+
+    for(int i = 0; i < 1000000; ++i) {}
+      
   //   // Check if new data is available
-  //   int status = I2C_ReadRegister(0x0F, 0x27);
+  //  // int status = I2C_ReadRegister(0x0F, 0x27);
   //  // if(status & 0x08) { // Check if ZYXDA bit is set
+
   //   if(status) { 
   //       // Read X(0x28) and Y(0x29)
   //       int x_data = I2C_ReadData(0x28, 0x29);
@@ -188,7 +260,7 @@ int main(void)
   //       // Simple delay loop; replace with a proper delay mechanism to match sensor data rate
   //       for(int i = 0; i < 1000000; ++i) {}
   //   }
-  // }
+   }
 }
 /*
 void I2C_WriteRegister(int deviceAddr, int registerAddr, int data) {
