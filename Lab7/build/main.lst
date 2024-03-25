@@ -1,0 +1,909 @@
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 1
+
+
+   1              		.cpu cortex-m0
+   2              		.arch armv6s-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.file	"main.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Src/main.c"
+  18              		.section	.text._Error_Handler,"ax",%progbits
+  19              		.align	1
+  20              		.global	_Error_Handler
+  21              		.syntax unified
+  22              		.code	16
+  23              		.thumb_func
+  25              	_Error_Handler:
+  26              	.LFB42:
+   1:Src/main.c    **** /**
+   2:Src/main.c    ****   *
+   3:Src/main.c    ****   * Brandon Mouser
+   4:Src/main.c    ****   * U0962682
+   5:Src/main.c    ****   *
+   6:Src/main.c    ****   ******************************************************************************
+   7:Src/main.c    ****   * File Name          : main.c
+   8:Src/main.c    ****   * Description        : Main program body
+   9:Src/main.c    ****   ******************************************************************************
+  10:Src/main.c    ****   ** This notice applies to any and all portions of this file
+  11:Src/main.c    ****   * that are not between comment pairs USER CODE BEGIN and
+  12:Src/main.c    ****   * USER CODE END. Other portions of this file, whether
+  13:Src/main.c    ****   * inserted by the user or by software development tools
+  14:Src/main.c    ****   * are owned by their respective copyright owners.
+  15:Src/main.c    ****   *
+  16:Src/main.c    ****   * COPYRIGHT(c) 2018 STMicroelectronics
+  17:Src/main.c    ****   *
+  18:Src/main.c    ****   * Redistribution and use in source and binary forms, with or without modification,
+  19:Src/main.c    ****   * are permitted provided that the following conditions are met:
+  20:Src/main.c    ****   *   1. Redistributions of source code must retain the above copyright notice,
+  21:Src/main.c    ****   *      this list of conditions and the following disclaimer.
+  22:Src/main.c    ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+  23:Src/main.c    ****   *      this list of conditions and the following disclaimer in the documentation
+  24:Src/main.c    ****   *      and/or other materials provided with the distribution.
+  25:Src/main.c    ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  26:Src/main.c    ****   *      may be used to endorse or promote products derived from this software
+  27:Src/main.c    ****   *      without specific prior written permission.
+  28:Src/main.c    ****   *
+  29:Src/main.c    ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  30:Src/main.c    ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  31:Src/main.c    ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  32:Src/main.c    ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 2
+
+
+  33:Src/main.c    ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  34:Src/main.c    ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  35:Src/main.c    ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  36:Src/main.c    ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  37:Src/main.c    ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  38:Src/main.c    ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  39:Src/main.c    ****   *
+  40:Src/main.c    ****   ******************************************************************************
+  41:Src/main.c    ****   */
+  42:Src/main.c    **** 
+  43:Src/main.c    **** /* Includes ------------------------------------------------------------------*/
+  44:Src/main.c    **** #include "main.h"
+  45:Src/main.c    **** #include "stm32f0xx_hal.h"
+  46:Src/main.c    **** void _Error_Handler(char * file, int line);
+  47:Src/main.c    **** 
+  48:Src/main.c    **** /* USER CODE BEGIN Includes */
+  49:Src/main.c    **** 
+  50:Src/main.c    **** /* USER CODE END Includes */
+  51:Src/main.c    **** 
+  52:Src/main.c    **** /* Private variables ---------------------------------------------------------*/
+  53:Src/main.c    **** 
+  54:Src/main.c    **** /* USER CODE BEGIN PV */
+  55:Src/main.c    **** /* Private variables ---------------------------------------------------------*/
+  56:Src/main.c    **** 
+  57:Src/main.c    **** /* USER CODE END PV */
+  58:Src/main.c    **** 
+  59:Src/main.c    **** /* Private function prototypes -----------------------------------------------*/
+  60:Src/main.c    **** void SystemClock_Config(void);
+  61:Src/main.c    **** 
+  62:Src/main.c    **** /* USER CODE BEGIN PFP */
+  63:Src/main.c    **** /* Private function prototypes -----------------------------------------------*/
+  64:Src/main.c    **** // Sine Wave: 8-bit, 32 samples/cycle
+  65:Src/main.c    **** 
+  66:Src/main.c    **** const uint8_t sine_table[32] = {127,151,175,197,216,232,244,251,254,251,244,
+  67:Src/main.c    **** 232,216,197,175,151,127,102,78,56,37,21,9,2,0,2,9,21,37,56,78,102};
+  68:Src/main.c    **** // Triangle Wave: 8-bit, 32 samples/cycle
+  69:Src/main.c    **** const uint8_t triangle_table[32] = {0,15,31,47,63,79,95,111,127,142,158,174,
+  70:Src/main.c    **** 190,206,222,238,254,238,222,206,190,174,158,142,127,111,95,79,63,47,31,15};
+  71:Src/main.c    **** // Sawtooth Wave: 8-bit, 32 samples/cycle
+  72:Src/main.c    **** const uint8_t sawtooth_table[32] = {0,7,15,23,31,39,47,55,63,71,79,87,95,103,
+  73:Src/main.c    **** 111,119,127,134,142,150,158,166,174,182,190,198,206,214,222,230,238,246};
+  74:Src/main.c    **** // Square Wave: 8-bit, 32 samples/cycle
+  75:Src/main.c    **** const uint8_t square_table[32] = {254,254,254,254,254,254,254,254,254,254,
+  76:Src/main.c    **** 254,254,254,254,254,254,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  77:Src/main.c    **** 
+  78:Src/main.c    **** /* USER CODE END PFP */
+  79:Src/main.c    **** 
+  80:Src/main.c    **** /* USER CODE BEGIN 0 */
+  81:Src/main.c    **** 
+  82:Src/main.c    **** /* USER CODE END 0 */
+  83:Src/main.c    **** 
+  84:Src/main.c    **** int main(void)
+  85:Src/main.c    **** {
+  86:Src/main.c    ****   
+  87:Src/main.c    ****   HAL_Init();
+  88:Src/main.c    ****   SystemClock_Config();
+  89:Src/main.c    ****   
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 3
+
+
+  90:Src/main.c    ****   // enable GPIOA and GPIOC clock
+  91:Src/main.c    ****   RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
+  92:Src/main.c    ****   RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
+  93:Src/main.c    **** 
+  94:Src/main.c    ****   // clear LED
+  95:Src/main.c    ****   GPIOC->MODER &= ~(GPIO_MODER_MODER6 | GPIO_MODER_MODER7 | GPIO_MODER_MODER8 | GPIO_MODER_MODER9);
+  96:Src/main.c    ****   // Set GPIOC output mode
+  97:Src/main.c    ****   GPIOC->MODER |= (1 << (6 * 2)) | (1 << (7 * 2)) | (1 << (8 * 2)) | (1 << (9 * 2));
+  98:Src/main.c    ****   GPIOC->OTYPER &= ~((1 << 6) | (1 << 7) | (1 << 8) | (1 << 9)); // clear and both push-pull type
+  99:Src/main.c    ****   GPIOC->OSPEEDR &= ~((1 << (6 * 2)) | (1 << (7 * 2)) | (1 << (8 * 2)) | (1 << (9 * 2))); // clear 
+ 100:Src/main.c    ****   GPIOC->PUPDR &= ~((3 << (6 * 2)) | (3 << (7 * 2)) | (3 << (8 * 2)) | (3 << (9 * 2))); // clear an
+ 101:Src/main.c    ****   
+ 102:Src/main.c    ****   // GPIOA to analog mode 11
+ 103:Src/main.c    ****   GPIOA->MODER |= (3 << (2 * 0));
+ 104:Src/main.c    **** 
+ 105:Src/main.c    ****   // Enable ADC clock
+ 106:Src/main.c    ****   RCC->APB2ENR |= RCC_APB2ENR_ADC1EN;
+ 107:Src/main.c    **** 
+ 108:Src/main.c    ****   // Setup ADC
+ 109:Src/main.c    ****   ADC1->CR &= ~ADC_CR_ADEN; // clear ADC
+ 110:Src/main.c    ****   ADC1->CFGR1 &= ~ADC_CFGR1_RES; // Set resolution as 12 bits
+ 111:Src/main.c    ****   ADC1->CFGR1 |= ADC_CFGR1_CONT; // Continuous conversion mode
+ 112:Src/main.c    ****   ADC1->CHSELR = ADC_CHSELR_CHSEL0; // select channel 0
+ 113:Src/main.c    ****   ADC1->CR |= ADC_CR_ADEN; // enable ADC
+ 114:Src/main.c    ****   while (!(ADC1->ISR & ADC_ISR_ADRDY)); // wait until ADC is ready
+ 115:Src/main.c    ****   ADC1->CR |= ADC_CR_ADSTART; // convert ADC
+ 116:Src/main.c    **** 
+ 117:Src/main.c    ****   //part 1
+ 118:Src/main.c    ****   while (1) {
+ 119:Src/main.c    ****       // Read from ADC
+ 120:Src/main.c    ****       if (ADC1->ISR & ADC_ISR_EOC) { // check if converting is done 
+ 121:Src/main.c    ****           uint32_t adcValue = ADC1->DR; // read value from the data register
+ 122:Src/main.c    ****           // ADC
+ 123:Src/main.c    ****           if (adcValue > 100) {
+ 124:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_6; // PC6 High
+ 125:Src/main.c    ****           } else {
+ 126:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BR_6; // PC6 Low
+ 127:Src/main.c    ****           }
+ 128:Src/main.c    **** 
+ 129:Src/main.c    ****           if (adcValue > 400) {
+ 130:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_7; // PC7
+ 131:Src/main.c    ****           } else {
+ 132:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BR_7; // PC7
+ 133:Src/main.c    ****           }
+ 134:Src/main.c    **** 
+ 135:Src/main.c    ****           if (adcValue > 700) {
+ 136:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_8; // PC8
+ 137:Src/main.c    ****           } else {
+ 138:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BR_8; // PC8
+ 139:Src/main.c    ****           }
+ 140:Src/main.c    **** 
+ 141:Src/main.c    ****           if (adcValue > 1000) {
+ 142:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_9; // PC9
+ 143:Src/main.c    ****           } else {
+ 144:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BR_9; // PC9
+ 145:Src/main.c    ****           }
+ 146:Src/main.c    ****       }
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 4
+
+
+ 147:Src/main.c    ****   }
+ 148:Src/main.c    **** 
+ 149:Src/main.c    ****   // part2
+ 150:Src/main.c    **** //   GPIOA->MODER |= 3 << (4 * 2);       // PA4 as analog mode（DAC1_OUT1）
+ 151:Src/main.c    **** 
+ 152:Src/main.c    **** //   // DAC
+ 153:Src/main.c    **** //   RCC->APB1ENR |= RCC_APB1ENR_DACEN;  // DAC clock
+ 154:Src/main.c    **** //   DAC->CR |= DAC_CR_EN1;              // DAC channel 1
+ 155:Src/main.c    **** 
+ 156:Src/main.c    **** //     uint32_t index = 0;
+ 157:Src/main.c    **** //     while (1) {
+ 158:Src/main.c    **** //         DAC->SWTRIGR |= DAC_SWTRIGR_SWTRIG1;
+ 159:Src/main.c    **** //         DAC->DHR8R1 = sine_table[index];  // wtite wave to DAC data register
+ 160:Src/main.c    **** //         index = (index + 1) % 32;       // next sample
+ 161:Src/main.c    **** //         HAL_Delay(1);                    
+ 162:Src/main.c    **** //     }
+ 163:Src/main.c    ****  }
+ 164:Src/main.c    **** 
+ 165:Src/main.c    **** /** System Clock Configuration
+ 166:Src/main.c    **** */
+ 167:Src/main.c    **** void SystemClock_Config(void)
+ 168:Src/main.c    **** {
+ 169:Src/main.c    **** 
+ 170:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct;
+ 171:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct;
+ 172:Src/main.c    **** 
+ 173:Src/main.c    ****     /**Initializes the CPU, AHB and APB busses clocks
+ 174:Src/main.c    ****     */
+ 175:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+ 176:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+ 177:Src/main.c    ****   RCC_OscInitStruct.HSICalibrationValue = 16;
+ 178:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+ 179:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 180:Src/main.c    ****   {
+ 181:Src/main.c    ****     _Error_Handler(__FILE__, __LINE__);
+ 182:Src/main.c    ****   }
+ 183:Src/main.c    **** 
+ 184:Src/main.c    ****     /**Initializes the CPU, AHB and APB busses clocks
+ 185:Src/main.c    ****     */
+ 186:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+ 187:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1;
+ 188:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+ 189:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 190:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 191:Src/main.c    **** 
+ 192:Src/main.c    ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+ 193:Src/main.c    ****   {
+ 194:Src/main.c    ****     _Error_Handler(__FILE__, __LINE__);
+ 195:Src/main.c    ****   }
+ 196:Src/main.c    **** 
+ 197:Src/main.c    ****     /**Configure the Systick interrupt time
+ 198:Src/main.c    ****     */
+ 199:Src/main.c    ****   HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+ 200:Src/main.c    **** 
+ 201:Src/main.c    ****     /**Configure the Systick
+ 202:Src/main.c    ****     */
+ 203:Src/main.c    ****   HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 5
+
+
+ 204:Src/main.c    **** 
+ 205:Src/main.c    ****   /* SysTick_IRQn interrupt configuration */
+ 206:Src/main.c    ****   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+ 207:Src/main.c    **** }
+ 208:Src/main.c    **** 
+ 209:Src/main.c    **** /* USER CODE BEGIN 4 */
+ 210:Src/main.c    **** 
+ 211:Src/main.c    **** /* USER CODE END 4 */
+ 212:Src/main.c    **** 
+ 213:Src/main.c    **** /**
+ 214:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
+ 215:Src/main.c    ****   * @param  None
+ 216:Src/main.c    ****   * @retval None
+ 217:Src/main.c    ****   */
+ 218:Src/main.c    **** void _Error_Handler(char * file, int line)
+ 219:Src/main.c    **** {
+  27              		.loc 1 219 1 view -0
+  28              		.cfi_startproc
+  29              		@ Volatile: function does not return.
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  34              	.L2:
+ 220:Src/main.c    ****   /* USER CODE BEGIN Error_Handler_Debug */
+ 221:Src/main.c    ****   /* User can add his own implementation to report the HAL error return state */
+ 222:Src/main.c    ****   while(1)
+  35              		.loc 1 222 3 view .LVU1
+ 223:Src/main.c    ****   {
+ 224:Src/main.c    ****   }
+  36              		.loc 1 224 3 view .LVU2
+ 222:Src/main.c    ****   {
+  37              		.loc 1 222 8 view .LVU3
+  38 0000 FEE7     		b	.L2
+  39              		.cfi_endproc
+  40              	.LFE42:
+  42              		.section	.rodata.SystemClock_Config.str1.4,"aMS",%progbits,1
+  43              		.align	2
+  44              	.LC0:
+  45 0000 5372632F 		.ascii	"Src/main.c\000"
+  45      6D61696E 
+  45      2E6300
+  46              		.global	__aeabi_uidiv
+  47              		.section	.text.SystemClock_Config,"ax",%progbits
+  48              		.align	1
+  49              		.global	SystemClock_Config
+  50              		.syntax unified
+  51              		.code	16
+  52              		.thumb_func
+  54              	SystemClock_Config:
+  55              	.LFB41:
+ 168:Src/main.c    **** 
+  56              		.loc 1 168 1 view -0
+  57              		.cfi_startproc
+  58              		@ args = 0, pretend = 0, frame = 72
+  59              		@ frame_needed = 0, uses_anonymous_args = 0
+  60 0000 00B5     		push	{lr}
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 6
+
+
+  61              	.LCFI0:
+  62              		.cfi_def_cfa_offset 4
+  63              		.cfi_offset 14, -4
+  64 0002 93B0     		sub	sp, sp, #76
+  65              	.LCFI1:
+  66              		.cfi_def_cfa_offset 80
+ 170:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct;
+  67              		.loc 1 170 3 view .LVU5
+ 171:Src/main.c    **** 
+  68              		.loc 1 171 3 view .LVU6
+ 175:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  69              		.loc 1 175 3 view .LVU7
+ 175:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  70              		.loc 1 175 36 is_stmt 0 view .LVU8
+  71 0004 0223     		movs	r3, #2
+  72 0006 0593     		str	r3, [sp, #20]
+ 176:Src/main.c    ****   RCC_OscInitStruct.HSICalibrationValue = 16;
+  73              		.loc 1 176 3 is_stmt 1 view .LVU9
+ 176:Src/main.c    ****   RCC_OscInitStruct.HSICalibrationValue = 16;
+  74              		.loc 1 176 30 is_stmt 0 view .LVU10
+  75 0008 013B     		subs	r3, r3, #1
+  76 000a 0893     		str	r3, [sp, #32]
+ 177:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  77              		.loc 1 177 3 is_stmt 1 view .LVU11
+ 177:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  78              		.loc 1 177 41 is_stmt 0 view .LVU12
+  79 000c 0F33     		adds	r3, r3, #15
+  80 000e 0993     		str	r3, [sp, #36]
+ 178:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  81              		.loc 1 178 3 is_stmt 1 view .LVU13
+ 178:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  82              		.loc 1 178 34 is_stmt 0 view .LVU14
+  83 0010 0023     		movs	r3, #0
+  84 0012 0E93     		str	r3, [sp, #56]
+ 179:Src/main.c    ****   {
+  85              		.loc 1 179 3 is_stmt 1 view .LVU15
+ 179:Src/main.c    ****   {
+  86              		.loc 1 179 7 is_stmt 0 view .LVU16
+  87 0014 05A8     		add	r0, sp, #20
+  88 0016 FFF7FEFF 		bl	HAL_RCC_OscConfig
+  89              	.LVL1:
+ 179:Src/main.c    ****   {
+  90              		.loc 1 179 6 discriminator 1 view .LVU17
+  91 001a 0028     		cmp	r0, #0
+  92 001c 1ED1     		bne	.L6
+ 186:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1;
+  93              		.loc 1 186 3 is_stmt 1 view .LVU18
+ 186:Src/main.c    ****                               |RCC_CLOCKTYPE_PCLK1;
+  94              		.loc 1 186 31 is_stmt 0 view .LVU19
+  95 001e 0723     		movs	r3, #7
+  96 0020 0193     		str	r3, [sp, #4]
+ 188:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  97              		.loc 1 188 3 is_stmt 1 view .LVU20
+ 188:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  98              		.loc 1 188 34 is_stmt 0 view .LVU21
+  99 0022 0023     		movs	r3, #0
+ 100 0024 0293     		str	r3, [sp, #8]
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 7
+
+
+ 189:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 101              		.loc 1 189 3 is_stmt 1 view .LVU22
+ 189:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 102              		.loc 1 189 35 is_stmt 0 view .LVU23
+ 103 0026 0393     		str	r3, [sp, #12]
+ 190:Src/main.c    **** 
+ 104              		.loc 1 190 3 is_stmt 1 view .LVU24
+ 190:Src/main.c    **** 
+ 105              		.loc 1 190 36 is_stmt 0 view .LVU25
+ 106 0028 0493     		str	r3, [sp, #16]
+ 192:Src/main.c    ****   {
+ 107              		.loc 1 192 3 is_stmt 1 view .LVU26
+ 192:Src/main.c    ****   {
+ 108              		.loc 1 192 7 is_stmt 0 view .LVU27
+ 109 002a 0021     		movs	r1, #0
+ 110 002c 01A8     		add	r0, sp, #4
+ 111 002e FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 112              	.LVL2:
+ 192:Src/main.c    ****   {
+ 113              		.loc 1 192 6 discriminator 1 view .LVU28
+ 114 0032 0028     		cmp	r0, #0
+ 115 0034 16D1     		bne	.L7
+ 199:Src/main.c    **** 
+ 116              		.loc 1 199 3 is_stmt 1 view .LVU29
+ 199:Src/main.c    **** 
+ 117              		.loc 1 199 22 is_stmt 0 view .LVU30
+ 118 0036 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 119              	.LVL3:
+ 199:Src/main.c    **** 
+ 120              		.loc 1 199 3 discriminator 1 view .LVU31
+ 121 003a FA21     		movs	r1, #250
+ 122 003c 8900     		lsls	r1, r1, #2
+ 123 003e FFF7FEFF 		bl	__aeabi_uidiv
+ 124              	.LVL4:
+ 125 0042 FFF7FEFF 		bl	HAL_SYSTICK_Config
+ 126              	.LVL5:
+ 203:Src/main.c    **** 
+ 127              		.loc 1 203 3 is_stmt 1 view .LVU32
+ 128 0046 0420     		movs	r0, #4
+ 129 0048 FFF7FEFF 		bl	HAL_SYSTICK_CLKSourceConfig
+ 130              	.LVL6:
+ 206:Src/main.c    **** }
+ 131              		.loc 1 206 3 view .LVU33
+ 132 004c 0120     		movs	r0, #1
+ 133 004e 0022     		movs	r2, #0
+ 134 0050 0021     		movs	r1, #0
+ 135 0052 4042     		rsbs	r0, r0, #0
+ 136 0054 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 137              	.LVL7:
+ 207:Src/main.c    **** 
+ 138              		.loc 1 207 1 is_stmt 0 view .LVU34
+ 139 0058 13B0     		add	sp, sp, #76
+ 140              		@ sp needed
+ 141 005a 00BD     		pop	{pc}
+ 142              	.L6:
+ 181:Src/main.c    ****   }
+ 143              		.loc 1 181 5 is_stmt 1 view .LVU35
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 8
+
+
+ 144 005c 0348     		ldr	r0, .L8
+ 145 005e B521     		movs	r1, #181
+ 146 0060 FFF7FEFF 		bl	_Error_Handler
+ 147              	.LVL8:
+ 148              	.L7:
+ 194:Src/main.c    ****   }
+ 149              		.loc 1 194 5 view .LVU36
+ 150 0064 0148     		ldr	r0, .L8
+ 151 0066 C221     		movs	r1, #194
+ 152 0068 FFF7FEFF 		bl	_Error_Handler
+ 153              	.LVL9:
+ 154              	.L9:
+ 155              		.align	2
+ 156              	.L8:
+ 157 006c 00000000 		.word	.LC0
+ 158              		.cfi_endproc
+ 159              	.LFE41:
+ 161              		.section	.text.main,"ax",%progbits
+ 162              		.align	1
+ 163              		.global	main
+ 164              		.syntax unified
+ 165              		.code	16
+ 166              		.thumb_func
+ 168              	main:
+ 169              	.LFB40:
+  85:Src/main.c    ****   
+ 170              		.loc 1 85 1 view -0
+ 171              		.cfi_startproc
+ 172              		@ args = 0, pretend = 0, frame = 0
+ 173              		@ frame_needed = 0, uses_anonymous_args = 0
+ 174 0000 10B5     		push	{r4, lr}
+ 175              	.LCFI2:
+ 176              		.cfi_def_cfa_offset 8
+ 177              		.cfi_offset 4, -8
+ 178              		.cfi_offset 14, -4
+  87:Src/main.c    ****   SystemClock_Config();
+ 179              		.loc 1 87 3 view .LVU38
+ 180 0002 FFF7FEFF 		bl	HAL_Init
+ 181              	.LVL10:
+  88:Src/main.c    ****   
+ 182              		.loc 1 88 3 view .LVU39
+ 183 0006 FFF7FEFF 		bl	SystemClock_Config
+ 184              	.LVL11:
+  91:Src/main.c    ****   RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
+ 185              		.loc 1 91 3 view .LVU40
+  91:Src/main.c    ****   RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
+ 186              		.loc 1 91 6 is_stmt 0 view .LVU41
+ 187 000a 3F4A     		ldr	r2, .L25
+ 188 000c 5169     		ldr	r1, [r2, #20]
+  91:Src/main.c    ****   RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
+ 189              		.loc 1 91 15 view .LVU42
+ 190 000e 8023     		movs	r3, #128
+ 191 0010 9B02     		lsls	r3, r3, #10
+ 192 0012 0B43     		orrs	r3, r1
+ 193 0014 5361     		str	r3, [r2, #20]
+  92:Src/main.c    **** 
+ 194              		.loc 1 92 3 is_stmt 1 view .LVU43
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 9
+
+
+  92:Src/main.c    **** 
+ 195              		.loc 1 92 6 is_stmt 0 view .LVU44
+ 196 0016 5169     		ldr	r1, [r2, #20]
+  92:Src/main.c    **** 
+ 197              		.loc 1 92 15 view .LVU45
+ 198 0018 8023     		movs	r3, #128
+ 199 001a 1B03     		lsls	r3, r3, #12
+ 200 001c 0B43     		orrs	r3, r1
+ 201 001e 5361     		str	r3, [r2, #20]
+  95:Src/main.c    ****   // Set GPIOC output mode
+ 202              		.loc 1 95 3 is_stmt 1 view .LVU46
+  95:Src/main.c    ****   // Set GPIOC output mode
+ 203              		.loc 1 95 8 is_stmt 0 view .LVU47
+ 204 0020 3A4B     		ldr	r3, .L25+4
+ 205 0022 1968     		ldr	r1, [r3]
+  95:Src/main.c    ****   // Set GPIOC output mode
+ 206              		.loc 1 95 16 view .LVU48
+ 207 0024 3A48     		ldr	r0, .L25+8
+ 208 0026 0140     		ands	r1, r0
+ 209 0028 1960     		str	r1, [r3]
+  97:Src/main.c    ****   GPIOC->OTYPER &= ~((1 << 6) | (1 << 7) | (1 << 8) | (1 << 9)); // clear and both push-pull type
+ 210              		.loc 1 97 3 is_stmt 1 view .LVU49
+  97:Src/main.c    ****   GPIOC->OTYPER &= ~((1 << 6) | (1 << 7) | (1 << 8) | (1 << 9)); // clear and both push-pull type
+ 211              		.loc 1 97 8 is_stmt 0 view .LVU50
+ 212 002a 1C68     		ldr	r4, [r3]
+  97:Src/main.c    ****   GPIOC->OTYPER &= ~((1 << 6) | (1 << 7) | (1 << 8) | (1 << 9)); // clear and both push-pull type
+ 213              		.loc 1 97 16 view .LVU51
+ 214 002c AA21     		movs	r1, #170
+ 215 002e C902     		lsls	r1, r1, #11
+ 216 0030 2143     		orrs	r1, r4
+ 217 0032 1960     		str	r1, [r3]
+  98:Src/main.c    ****   GPIOC->OSPEEDR &= ~((1 << (6 * 2)) | (1 << (7 * 2)) | (1 << (8 * 2)) | (1 << (9 * 2))); // clear 
+ 218              		.loc 1 98 3 is_stmt 1 view .LVU52
+  98:Src/main.c    ****   GPIOC->OSPEEDR &= ~((1 << (6 * 2)) | (1 << (7 * 2)) | (1 << (8 * 2)) | (1 << (9 * 2))); // clear 
+ 219              		.loc 1 98 8 is_stmt 0 view .LVU53
+ 220 0034 5968     		ldr	r1, [r3, #4]
+  98:Src/main.c    ****   GPIOC->OSPEEDR &= ~((1 << (6 * 2)) | (1 << (7 * 2)) | (1 << (8 * 2)) | (1 << (9 * 2))); // clear 
+ 221              		.loc 1 98 17 view .LVU54
+ 222 0036 374C     		ldr	r4, .L25+12
+ 223 0038 2140     		ands	r1, r4
+ 224 003a 5960     		str	r1, [r3, #4]
+  99:Src/main.c    ****   GPIOC->PUPDR &= ~((3 << (6 * 2)) | (3 << (7 * 2)) | (3 << (8 * 2)) | (3 << (9 * 2))); // clear an
+ 225              		.loc 1 99 3 is_stmt 1 view .LVU55
+  99:Src/main.c    ****   GPIOC->PUPDR &= ~((3 << (6 * 2)) | (3 << (7 * 2)) | (3 << (8 * 2)) | (3 << (9 * 2))); // clear an
+ 226              		.loc 1 99 8 is_stmt 0 view .LVU56
+ 227 003c 9968     		ldr	r1, [r3, #8]
+  99:Src/main.c    ****   GPIOC->PUPDR &= ~((3 << (6 * 2)) | (3 << (7 * 2)) | (3 << (8 * 2)) | (3 << (9 * 2))); // clear an
+ 228              		.loc 1 99 18 view .LVU57
+ 229 003e 364C     		ldr	r4, .L25+16
+ 230 0040 2140     		ands	r1, r4
+ 231 0042 9960     		str	r1, [r3, #8]
+ 100:Src/main.c    ****   
+ 232              		.loc 1 100 3 is_stmt 1 view .LVU58
+ 100:Src/main.c    ****   
+ 233              		.loc 1 100 8 is_stmt 0 view .LVU59
+ 234 0044 D968     		ldr	r1, [r3, #12]
+ 100:Src/main.c    ****   
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 10
+
+
+ 235              		.loc 1 100 16 view .LVU60
+ 236 0046 0140     		ands	r1, r0
+ 237 0048 D960     		str	r1, [r3, #12]
+ 103:Src/main.c    **** 
+ 238              		.loc 1 103 3 is_stmt 1 view .LVU61
+ 103:Src/main.c    **** 
+ 239              		.loc 1 103 8 is_stmt 0 view .LVU62
+ 240 004a 9021     		movs	r1, #144
+ 241 004c C905     		lsls	r1, r1, #23
+ 242 004e 0B68     		ldr	r3, [r1]
+ 103:Src/main.c    **** 
+ 243              		.loc 1 103 16 view .LVU63
+ 244 0050 0320     		movs	r0, #3
+ 245 0052 0343     		orrs	r3, r0
+ 246 0054 0B60     		str	r3, [r1]
+ 106:Src/main.c    **** 
+ 247              		.loc 1 106 3 is_stmt 1 view .LVU64
+ 106:Src/main.c    **** 
+ 248              		.loc 1 106 6 is_stmt 0 view .LVU65
+ 249 0056 9169     		ldr	r1, [r2, #24]
+ 106:Src/main.c    **** 
+ 250              		.loc 1 106 16 view .LVU66
+ 251 0058 8023     		movs	r3, #128
+ 252 005a 9B00     		lsls	r3, r3, #2
+ 253 005c 0B43     		orrs	r3, r1
+ 254 005e 9361     		str	r3, [r2, #24]
+ 109:Src/main.c    ****   ADC1->CFGR1 &= ~ADC_CFGR1_RES; // Set resolution as 12 bits
+ 255              		.loc 1 109 3 is_stmt 1 view .LVU67
+ 109:Src/main.c    ****   ADC1->CFGR1 &= ~ADC_CFGR1_RES; // Set resolution as 12 bits
+ 256              		.loc 1 109 7 is_stmt 0 view .LVU68
+ 257 0060 2E4B     		ldr	r3, .L25+20
+ 258 0062 9A68     		ldr	r2, [r3, #8]
+ 109:Src/main.c    ****   ADC1->CFGR1 &= ~ADC_CFGR1_RES; // Set resolution as 12 bits
+ 259              		.loc 1 109 12 view .LVU69
+ 260 0064 0121     		movs	r1, #1
+ 261 0066 8A43     		bics	r2, r1
+ 262 0068 9A60     		str	r2, [r3, #8]
+ 110:Src/main.c    ****   ADC1->CFGR1 |= ADC_CFGR1_CONT; // Continuous conversion mode
+ 263              		.loc 1 110 3 is_stmt 1 view .LVU70
+ 110:Src/main.c    ****   ADC1->CFGR1 |= ADC_CFGR1_CONT; // Continuous conversion mode
+ 264              		.loc 1 110 7 is_stmt 0 view .LVU71
+ 265 006a DA68     		ldr	r2, [r3, #12]
+ 110:Src/main.c    ****   ADC1->CFGR1 |= ADC_CFGR1_CONT; // Continuous conversion mode
+ 266              		.loc 1 110 15 view .LVU72
+ 267 006c 1530     		adds	r0, r0, #21
+ 268 006e 8243     		bics	r2, r0
+ 269 0070 DA60     		str	r2, [r3, #12]
+ 111:Src/main.c    ****   ADC1->CHSELR = ADC_CHSELR_CHSEL0; // select channel 0
+ 270              		.loc 1 111 3 is_stmt 1 view .LVU73
+ 111:Src/main.c    ****   ADC1->CHSELR = ADC_CHSELR_CHSEL0; // select channel 0
+ 271              		.loc 1 111 7 is_stmt 0 view .LVU74
+ 272 0072 D868     		ldr	r0, [r3, #12]
+ 111:Src/main.c    ****   ADC1->CHSELR = ADC_CHSELR_CHSEL0; // select channel 0
+ 273              		.loc 1 111 15 view .LVU75
+ 274 0074 8022     		movs	r2, #128
+ 275 0076 9201     		lsls	r2, r2, #6
+ 276 0078 0243     		orrs	r2, r0
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 11
+
+
+ 277 007a DA60     		str	r2, [r3, #12]
+ 112:Src/main.c    ****   ADC1->CR |= ADC_CR_ADEN; // enable ADC
+ 278              		.loc 1 112 3 is_stmt 1 view .LVU76
+ 112:Src/main.c    ****   ADC1->CR |= ADC_CR_ADEN; // enable ADC
+ 279              		.loc 1 112 16 is_stmt 0 view .LVU77
+ 280 007c 9962     		str	r1, [r3, #40]
+ 113:Src/main.c    ****   while (!(ADC1->ISR & ADC_ISR_ADRDY)); // wait until ADC is ready
+ 281              		.loc 1 113 3 is_stmt 1 view .LVU78
+ 113:Src/main.c    ****   while (!(ADC1->ISR & ADC_ISR_ADRDY)); // wait until ADC is ready
+ 282              		.loc 1 113 7 is_stmt 0 view .LVU79
+ 283 007e 9A68     		ldr	r2, [r3, #8]
+ 113:Src/main.c    ****   while (!(ADC1->ISR & ADC_ISR_ADRDY)); // wait until ADC is ready
+ 284              		.loc 1 113 12 view .LVU80
+ 285 0080 0A43     		orrs	r2, r1
+ 286 0082 9A60     		str	r2, [r3, #8]
+ 114:Src/main.c    ****   ADC1->CR |= ADC_CR_ADSTART; // convert ADC
+ 287              		.loc 1 114 3 is_stmt 1 view .LVU81
+ 288              	.L11:
+ 114:Src/main.c    ****   ADC1->CR |= ADC_CR_ADSTART; // convert ADC
+ 289              		.loc 1 114 10 discriminator 1 view .LVU82
+ 114:Src/main.c    ****   ADC1->CR |= ADC_CR_ADSTART; // convert ADC
+ 290              		.loc 1 114 16 is_stmt 0 discriminator 1 view .LVU83
+ 291 0084 254B     		ldr	r3, .L25+20
+ 292 0086 1B68     		ldr	r3, [r3]
+ 114:Src/main.c    ****   ADC1->CR |= ADC_CR_ADSTART; // convert ADC
+ 293              		.loc 1 114 10 discriminator 1 view .LVU84
+ 294 0088 DB07     		lsls	r3, r3, #31
+ 295 008a FBD5     		bpl	.L11
+ 115:Src/main.c    **** 
+ 296              		.loc 1 115 3 is_stmt 1 view .LVU85
+ 115:Src/main.c    **** 
+ 297              		.loc 1 115 7 is_stmt 0 view .LVU86
+ 298 008c 234A     		ldr	r2, .L25+20
+ 299 008e 9368     		ldr	r3, [r2, #8]
+ 115:Src/main.c    **** 
+ 300              		.loc 1 115 12 view .LVU87
+ 301 0090 0421     		movs	r1, #4
+ 302 0092 0B43     		orrs	r3, r1
+ 303 0094 9360     		str	r3, [r2, #8]
+ 304 0096 23E0     		b	.L13
+ 305              	.LVL12:
+ 306              	.L14:
+ 307              	.LBB2:
+ 126:Src/main.c    ****           }
+ 308              		.loc 1 126 15 is_stmt 1 view .LVU88
+ 126:Src/main.c    ****           }
+ 309              		.loc 1 126 27 is_stmt 0 view .LVU89
+ 310 0098 1C4A     		ldr	r2, .L25+4
+ 311 009a 8021     		movs	r1, #128
+ 312 009c C903     		lsls	r1, r1, #15
+ 313 009e 9161     		str	r1, [r2, #24]
+ 129:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_7; // PC7
+ 314              		.loc 1 129 11 is_stmt 1 view .LVU90
+ 132:Src/main.c    ****           }
+ 315              		.loc 1 132 15 view .LVU91
+ 132:Src/main.c    ****           }
+ 316              		.loc 1 132 27 is_stmt 0 view .LVU92
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 12
+
+
+ 317 00a0 8021     		movs	r1, #128
+ 318 00a2 0904     		lsls	r1, r1, #16
+ 319 00a4 9161     		str	r1, [r2, #24]
+ 320              	.L17:
+ 135:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_8; // PC8
+ 321              		.loc 1 135 11 is_stmt 1 view .LVU93
+ 135:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_8; // PC8
+ 322              		.loc 1 135 14 is_stmt 0 view .LVU94
+ 323 00a6 AF22     		movs	r2, #175
+ 324 00a8 9200     		lsls	r2, r2, #2
+ 325 00aa 9342     		cmp	r3, r2
+ 326 00ac 10D9     		bls	.L18
+ 136:Src/main.c    ****           } else {
+ 327              		.loc 1 136 15 is_stmt 1 view .LVU95
+ 136:Src/main.c    ****           } else {
+ 328              		.loc 1 136 27 is_stmt 0 view .LVU96
+ 329 00ae 174A     		ldr	r2, .L25+4
+ 330 00b0 8021     		movs	r1, #128
+ 331 00b2 4900     		lsls	r1, r1, #1
+ 332 00b4 9161     		str	r1, [r2, #24]
+ 141:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_9; // PC9
+ 333              		.loc 1 141 11 is_stmt 1 view .LVU97
+ 141:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_9; // PC9
+ 334              		.loc 1 141 14 is_stmt 0 view .LVU98
+ 335 00b6 FA22     		movs	r2, #250
+ 336 00b8 9200     		lsls	r2, r2, #2
+ 337 00ba 9342     		cmp	r3, r2
+ 338 00bc 0CD9     		bls	.L20
+ 142:Src/main.c    ****           } else {
+ 339              		.loc 1 142 15 is_stmt 1 view .LVU99
+ 142:Src/main.c    ****           } else {
+ 340              		.loc 1 142 27 is_stmt 0 view .LVU100
+ 341 00be 134B     		ldr	r3, .L25+4
+ 342              	.LVL13:
+ 142:Src/main.c    ****           } else {
+ 343              		.loc 1 142 27 view .LVU101
+ 344 00c0 8022     		movs	r2, #128
+ 345 00c2 9200     		lsls	r2, r2, #2
+ 346 00c4 9A61     		str	r2, [r3, #24]
+ 347 00c6 0BE0     		b	.L13
+ 348              	.LVL14:
+ 349              	.L15:
+ 130:Src/main.c    ****           } else {
+ 350              		.loc 1 130 15 is_stmt 1 view .LVU102
+ 130:Src/main.c    ****           } else {
+ 351              		.loc 1 130 27 is_stmt 0 view .LVU103
+ 352 00c8 104A     		ldr	r2, .L25+4
+ 353 00ca 8021     		movs	r1, #128
+ 354 00cc 9161     		str	r1, [r2, #24]
+ 355 00ce EAE7     		b	.L17
+ 356              	.LVL15:
+ 357              	.L18:
+ 138:Src/main.c    ****           }
+ 358              		.loc 1 138 15 is_stmt 1 view .LVU104
+ 138:Src/main.c    ****           }
+ 359              		.loc 1 138 27 is_stmt 0 view .LVU105
+ 360 00d0 0E4B     		ldr	r3, .L25+4
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 13
+
+
+ 361 00d2 8022     		movs	r2, #128
+ 362 00d4 5204     		lsls	r2, r2, #17
+ 363 00d6 9A61     		str	r2, [r3, #24]
+ 141:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_9; // PC9
+ 364              		.loc 1 141 11 is_stmt 1 view .LVU106
+ 365              	.L20:
+ 144:Src/main.c    ****           }
+ 366              		.loc 1 144 15 view .LVU107
+ 144:Src/main.c    ****           }
+ 367              		.loc 1 144 27 is_stmt 0 view .LVU108
+ 368 00d8 0C4B     		ldr	r3, .L25+4
+ 369 00da 8022     		movs	r2, #128
+ 370 00dc 9204     		lsls	r2, r2, #18
+ 371 00de 9A61     		str	r2, [r3, #24]
+ 372              	.LVL16:
+ 373              	.L13:
+ 144:Src/main.c    ****           }
+ 374              		.loc 1 144 27 view .LVU109
+ 375              	.LBE2:
+ 118:Src/main.c    ****       // Read from ADC
+ 376              		.loc 1 118 3 is_stmt 1 view .LVU110
+ 120:Src/main.c    ****           uint32_t adcValue = ADC1->DR; // read value from the data register
+ 377              		.loc 1 120 7 view .LVU111
+ 120:Src/main.c    ****           uint32_t adcValue = ADC1->DR; // read value from the data register
+ 378              		.loc 1 120 15 is_stmt 0 view .LVU112
+ 379 00e0 0E4B     		ldr	r3, .L25+20
+ 380 00e2 1B68     		ldr	r3, [r3]
+ 120:Src/main.c    ****           uint32_t adcValue = ADC1->DR; // read value from the data register
+ 381              		.loc 1 120 10 view .LVU113
+ 382 00e4 5B07     		lsls	r3, r3, #29
+ 383 00e6 FBD5     		bpl	.L13
+ 384              	.LBB3:
+ 121:Src/main.c    ****           // ADC
+ 385              		.loc 1 121 11 is_stmt 1 view .LVU114
+ 121:Src/main.c    ****           // ADC
+ 386              		.loc 1 121 20 is_stmt 0 view .LVU115
+ 387 00e8 0C4B     		ldr	r3, .L25+20
+ 388 00ea 1B6C     		ldr	r3, [r3, #64]
+ 389              	.LVL17:
+ 123:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_6; // PC6 High
+ 390              		.loc 1 123 11 is_stmt 1 view .LVU116
+ 123:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_6; // PC6 High
+ 391              		.loc 1 123 14 is_stmt 0 view .LVU117
+ 392 00ec 642B     		cmp	r3, #100
+ 393 00ee D3D9     		bls	.L14
+ 124:Src/main.c    ****           } else {
+ 394              		.loc 1 124 15 is_stmt 1 view .LVU118
+ 124:Src/main.c    ****           } else {
+ 395              		.loc 1 124 27 is_stmt 0 view .LVU119
+ 396 00f0 064A     		ldr	r2, .L25+4
+ 397 00f2 4021     		movs	r1, #64
+ 398 00f4 9161     		str	r1, [r2, #24]
+ 129:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_7; // PC7
+ 399              		.loc 1 129 11 is_stmt 1 view .LVU120
+ 129:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_7; // PC7
+ 400              		.loc 1 129 14 is_stmt 0 view .LVU121
+ 401 00f6 C822     		movs	r2, #200
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 14
+
+
+ 402 00f8 5200     		lsls	r2, r2, #1
+ 403 00fa 9342     		cmp	r3, r2
+ 404 00fc E4D8     		bhi	.L15
+ 132:Src/main.c    ****           }
+ 405              		.loc 1 132 15 is_stmt 1 view .LVU122
+ 132:Src/main.c    ****           }
+ 406              		.loc 1 132 27 is_stmt 0 view .LVU123
+ 407 00fe 034B     		ldr	r3, .L25+4
+ 408              	.LVL18:
+ 132:Src/main.c    ****           }
+ 409              		.loc 1 132 27 view .LVU124
+ 410 0100 8022     		movs	r2, #128
+ 411 0102 1204     		lsls	r2, r2, #16
+ 412 0104 9A61     		str	r2, [r3, #24]
+ 135:Src/main.c    ****               GPIOC->BSRR = GPIO_BSRR_BS_8; // PC8
+ 413              		.loc 1 135 11 is_stmt 1 view .LVU125
+ 414 0106 E3E7     		b	.L18
+ 415              	.L26:
+ 416              		.align	2
+ 417              	.L25:
+ 418 0108 00100240 		.word	1073876992
+ 419 010c 00080048 		.word	1207961600
+ 420 0110 FF0FF0FF 		.word	-1044481
+ 421 0114 3FFCFFFF 		.word	-961
+ 422 0118 FFAFFAFF 		.word	-348161
+ 423 011c 00240140 		.word	1073816576
+ 424              	.LBE3:
+ 425              		.cfi_endproc
+ 426              	.LFE40:
+ 428              		.global	square_table
+ 429              		.section	.rodata.square_table,"a"
+ 430              		.align	2
+ 433              	square_table:
+ 434 0000 FEFEFEFE 		.ascii	"\376\376\376\376\376\376\376\376\376\376\376\376\376"
+ 434      FEFEFEFE 
+ 434      FEFEFEFE 
+ 434      FE
+ 435 000d FEFEFE00 		.ascii	"\376\376\376\000\000\000\000\000\000\000\000\000\000"
+ 435      00000000 
+ 435      00000000 
+ 435      00
+ 436 001a 00000000 		.ascii	"\000\000\000\000\000\000"
+ 436      0000
+ 437              		.global	sawtooth_table
+ 438              		.section	.rodata.sawtooth_table,"a"
+ 439              		.align	2
+ 442              	sawtooth_table:
+ 443 0000 00070F17 		.ascii	"\000\007\017\027\037'/7?GOW_gow\177\206\216\226\236"
+ 443      1F272F37 
+ 443      3F474F57 
+ 443      5F676F77 
+ 443      7F868E96 
+ 444 0015 A6AEB6BE 		.ascii	"\246\256\266\276\306\316\326\336\346\356\366"
+ 444      C6CED6DE 
+ 444      E6EEF6
+ 445              		.global	triangle_table
+ 446              		.section	.rodata.triangle_table,"a"
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 15
+
+
+ 447              		.align	2
+ 450              	triangle_table:
+ 451 0000 000F1F2F 		.ascii	"\000\017\037/?O_o\177\216\236\256\276\316\336\356\376"
+ 451      3F4F5F6F 
+ 451      7F8E9EAE 
+ 451      BECEDEEE 
+ 451      FE
+ 452 0011 EEDECEBE 		.ascii	"\356\336\316\276\256\236\216\177o_O?/\037\017"
+ 452      AE9E8E7F 
+ 452      6F5F4F3F 
+ 452      2F1F0F
+ 453              		.global	sine_table
+ 454              		.section	.rodata.sine_table,"a"
+ 455              		.align	2
+ 458              	sine_table:
+ 459 0000 7F97AFC5 		.ascii	"\177\227\257\305\330\350\364\373\376\373\364\350\330"
+ 459      D8E8F4FB 
+ 459      FEFBF4E8 
+ 459      D8
+ 460 000d C5AF977F 		.ascii	"\305\257\227\177fN8%\025\011\002\000\002\011\025%8N"
+ 460      664E3825 
+ 460      15090200 
+ 460      02091525 
+ 460      384E
+ 461 001f 66       		.ascii	"f"
+ 462              		.text
+ 463              	.Letext0:
+ 464              		.file 2 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f072xb.h"
+ 465              		.file 3 "/Applications/ArmGNUToolchain/13.2.Rel1/arm-none-eabi/arm-none-eabi/include/machine/_defa
+ 466              		.file 4 "/Applications/ArmGNUToolchain/13.2.Rel1/arm-none-eabi/arm-none-eabi/include/sys/_stdint.h
+ 467              		.file 5 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h"
+ 468              		.file 6 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h"
+ 469              		.file 7 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_cortex.h"
+ 470              		.file 8 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h"
+ARM GAS  /var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s 			page 16
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:19     .text._Error_Handler:00000000 $t
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:25     .text._Error_Handler:00000000 _Error_Handler
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:43     .rodata.SystemClock_Config.str1.4:00000000 $d
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:48     .text.SystemClock_Config:00000000 $t
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:54     .text.SystemClock_Config:00000000 SystemClock_Config
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:157    .text.SystemClock_Config:0000006c $d
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:162    .text.main:00000000 $t
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:168    .text.main:00000000 main
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:418    .text.main:00000108 $d
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:433    .rodata.square_table:00000000 square_table
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:430    .rodata.square_table:00000000 $d
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:442    .rodata.sawtooth_table:00000000 sawtooth_table
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:439    .rodata.sawtooth_table:00000000 $d
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:450    .rodata.triangle_table:00000000 triangle_table
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:447    .rodata.triangle_table:00000000 $d
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:458    .rodata.sine_table:00000000 sine_table
+/var/folders/zd/d6dt4dr905z_mvnxcmn6y_dc0000gn/T//ccO6CrLD.s:455    .rodata.sine_table:00000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_uidiv
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+HAL_RCC_GetHCLKFreq
+HAL_SYSTICK_Config
+HAL_SYSTICK_CLKSourceConfig
+HAL_NVIC_SetPriority
+HAL_Init
