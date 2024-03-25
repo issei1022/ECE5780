@@ -119,15 +119,43 @@ void PendSV_Handler(void)
 }
 
 /**
-  * @brief This function handles TIM2_IRQHandler.
+  * @brief This function handles System tick timer.
   */
-void TIM2_IRQHandler(void)
+void SysTick_Handler(void)
 {
-    GPIOC->ODR ^= GPIO_PIN_8; // orange
-    GPIOC->ODR ^= GPIO_PIN_9; // green
-    TIM2->SR &= ~1; // clear flg
+  /* USER CODE BEGIN SysTick_IRQn 0 */
+
+  /* USER CODE END SysTick_IRQn 0 */
+  HAL_IncTick();
+  /* USER CODE BEGIN SysTick_IRQn 1 */
+  static uint32_t counter = 0; 
+  //GPIOC->BSRR = (1 << 7);
+  counter++; 
+  if (counter >= 200) { 
+    //HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_7); 
+    GPIOC->ODR ^= (1 << 7);
+    counter = 0; 
+  }
+  /* USER CODE END SysTick_IRQn 1 */
 }
 
+/**
+  * @brief This function handles Hard interapt.
+  */
+void EXTI0_1_IRQHandler(void)
+{
+  GPIOC->ODR ^= GPIO_PIN_8; // orange
+  GPIOC->ODR ^= GPIO_PIN_9; // green
+  // delay about 1 - 2 secs
+  for(volatile uint32_t i = 0; i < 1500000; i++){
+       
+  }
+  GPIOC->ODR ^= GPIO_PIN_8; // orange
+  GPIOC->ODR ^= GPIO_PIN_9; // green
+
+  // clear the pending register
+  EXTI->PR |= (1 << 0); //EXTI_PR_PR0
+}
 
 
 /******************************************************************************/
